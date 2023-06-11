@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 6</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            <p> З клавіатури вводиться номер дня тижня. Вивести на екран назву дня.</p>
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        let numDay = parseInt(prompt('Введіть номер дня тижня, від 1 до 7:'))
+
+        switch (numDay) {
+            case (1): document.write('Понеділок')
+                break
+            case (2): document.write('Вівторок')
+                break
+            case (3): document.write('Середа')
+                break
+            case (4): document.write('Четвер')
+                break
+            case (5): document.write('П"ятниця')
+                break
+            case (6): document.write('Субота')
+                break
+            case (7): document.write('Неділя')
+                break
+            default: document.write('Тиждень має лише сім днів.:)')
+                break
+        }
+
+    </script>
+</body>
+
+</html>

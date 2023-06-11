@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1</title>
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            <p>З клавіатури вводяться імена двох дітей та кількість у них цукерок. Вивести не екран ім’я тієї дитини,
+                у якої кількість цукерок є більшою, або вивести, що кількість однакова.</p>
+
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+
+    </div>
+    <h2>Результат рішення</h2>
+    <script>
+        let nameFirstChild = (prompt('Введіть ім"я першої дитини:'))
+        let numCandyFirstChild = parseInt(prompt('Введіть кількість цукерок першої дитини:'))
+
+        let nameSecondChild = (prompt('Введіть ім"я другої дитини:'))
+        let numCandySecondChild = parseInt(prompt('Введіть кількість цукерок другої дитини:'))
+
+        if (numCandyFirstChild > numCandySecondChild)
+            document.write(`Цукерок більше у ${nameFirstChild}`)
+        if ((numCandyFirstChild < numCandySecondChild))
+            document.write(`Цукерок більше у ${nameSecondChild}`)
+        else
+            document.write(`Все гаразд. Сліз не буде. Цукерок порівну!!! :)`)
+    </script>
+
+</body>
+
+</html>
