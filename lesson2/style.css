@@ -33,7 +33,7 @@ html{
 
 
 body{
-	width: 1440px;
+	max-width: 1440px;
 	padding: 0 15px;
 	background-color: rgba(15, 30, 33, 0.98);
 	font-size: 28px;
