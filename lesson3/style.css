@@ -55,14 +55,16 @@ h2{
 	color:aqua;
 	}
 .task__container {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+	display: flex;
+	flex-wrap: wrap;
+	
 	gap: 25px;
 	justify-content: space-between;
 }
 
 .task__item {
 	display: flex;
+	flex: 1 1 35%;
 	flex-direction: column;
 	gap: 25px;
 	border: 2px solid #fff;
@@ -70,6 +72,12 @@ h2{
 	font-size: 22px;
 	line-height: 1.2;
 	flex-grow: 1;
+}
+@media(max-width: 991.98px)
+{
+	.task__item{
+		flex: 1 1 100%;
+	}
 }
 
 .task__title {
