@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            <p> Дано рік народження (дата: 1 січня) та поточний рік. Знайти кількість років.</p>
+            <p> Вибачаюсь за трохи змінену умову.</p>
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        let yearBirth = parseInt(prompt('Введіть рік народження людини:'))
+        let interestYear = parseInt(prompt('Введіть рік для визначення віку:'))
+        let humanAge = interestYear - yearBirth
+
+        if (humanAge > 0)
+            document.write(`
+                <div> Вік людини в ${interestYear} році складав ${humanAge} рік(-ів).</div>
+            `)
+        else
+            document.write(`
+            <div>Людина в ${interestYear} році, ще не народилась.<div>
+                `)
+
+    </script>
+</body>
+
+</html>

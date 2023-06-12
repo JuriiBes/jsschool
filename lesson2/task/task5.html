@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 5</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            <p> Дано кількість секунд, що пройшла від початку доби. Визначити скільки це годин і хвилин.</p>
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        let numSeconds = parseInt(prompt('Введіть кількість секунд, які пройшли від початку доби:'))
+        const ONE_MINUTE = 60
+        const ONE_HOUR = ONE_MINUTE * 60
+        let resultHours = Math.trunc(numSeconds / ONE_HOUR)
+        let resultMinute = Math.trunc((numSeconds % ONE_HOUR) / ONE_MINUTE)
+        let remainderSecond = Math.trunc((numSeconds % ONE_HOUR) % ONE_MINUTE)
+
+        document.write(`
+            <div style="line-height:1.3">
+                Від початку доби минуло 
+                <span style="color:yellowgreen">${resultHours}</span> годин(a) 
+                <span style="color:yellowgreen">${resultMinute}</span> хвилин(a) та 
+                <span style="color:yellowgreen">${remainderSecond}</span> секунди(a).
+            </div>
+        `)
+
+
+    </script>
+</body>
+
+</html>
