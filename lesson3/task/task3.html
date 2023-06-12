@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 4</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            <p>З клавіатури вводиться вік людини. Вивести на екран ким він є (дитиною у садочку, школярем, студентом,
+                працівником, пенсіонером).</p>
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        let userAge = parseInt(prompt('Введіть вік людини:'))
+        const babyAge = 1
+        const childAge = 6
+        const schoolAge = 17
+        const studentAge = 25
+        const workerAge = 60
+
+        let definitionAge = ''
+
+        switch (true) {
+            case (userAge <= babyAge): definitionAge = 'Це ще немовля, яке потребує постійного маминого догляду.'
+                break
+            case (userAge <= childAge): definitionAge = 'Цей малюк ходе до садочка.'
+                break
+            case (userAge <= schoolAge): definitionAge = 'Дана людина шкільного віку.'
+                break
+            case (userAge <= studentAge): definitionAge = 'Дана людина студент, або вже працює.'
+                break
+            case (userAge <= workerAge): definitionAge = 'Дана людина є працівником.'
+                break
+            case (userAge > workerAge): definitionAge = 'Дана людина пенсійного віку.'
+                break
+            default: definitionAge = 'Не вірно введений вік'
+                break
+        }
+        document.write(`${definitionAge}`)
+    </script>
+</body>
+
+</html>
