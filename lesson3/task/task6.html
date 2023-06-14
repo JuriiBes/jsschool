@@ -43,17 +43,11 @@
         //     default: document.write('Щось новеньке.')
         //         break
         // }
-
-        if (3 <= numMonth && numMonth <= 5)
-            document.write('Весна.')
-        else if (6 <= numMonth && numMonth <= 8)
-            document.write('Літо.')
-        else if (9 <= numMonth && numMonth <= 11)
-            document.write('Осінь.')
-        else if (2 >= numMonth || (11 <= numMonth && numMonth <= 12))
-            document.write('Зима.')
-        if (numMonth > 12)
-            document.write('Щось пішло не так.:)')
+        if (2 >= numMonth || (11 <= numMonth && numMonth <= 12)) document.write('Зима.')
+        else if (numMonth <= 5) document.write('Весна.')
+        else if (numMonth <= 8) document.write('Літо.')
+        else if (numMonth <= 11) document.write('Осінь.')
+        else document.write('Щось пішло не так.:)')
 
 
     </script>
