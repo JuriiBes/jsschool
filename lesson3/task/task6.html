@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 7</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Задача 7</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            </p>З клавіатури вводиться номер місяця. Вивести до якої пори він відноситься</p>
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        let numMonth = parseInt(prompt('Ведіть номер місяця від 1 до 12:'))
+
+        // switch (numMonth) {
+        //     case (3): 
+        //     case (4): 
+        //     case (5): document.write('Весна')
+        //         break
+        //     case (6): 
+        //     case (7): 
+        //     case (8): document.write('Літо')
+        //         break
+        //     case (9): 
+        //     case (10): 
+        //     case (11): document.write('Осінь')
+        //         break
+        //     case (1): 
+        //     case (2): 
+        //     case (12): document.write('Зима')
+        //         break
+        //     default: document.write('Щось новеньке.')
+        //         break
+        // }
+
+        if (3 <= numMonth && numMonth <= 5)
+            document.write('Весна.')
+        else if (6 <= numMonth && numMonth <= 8)
+            document.write('Літо.')
+        else if (9 <= numMonth && numMonth <= 11)
+            document.write('Осінь.')
+        else if (2 >= numMonth || (11 <= numMonth && numMonth <= 12))
+            document.write('Зима.')
+        if (numMonth > 12)
+            document.write('Щось пішло не так.:)')
+
+
+    </script>
+</body>
+
+</html>
