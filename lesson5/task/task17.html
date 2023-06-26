@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 18</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Задача 18</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            </p>Користувач поступово вводить показники температури протягом року. Знайти середню температуру. </p>
+
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        let averageValue, sumTemperatures = 0, inputCounter = 1, questionsInput
+
+        let userTemperature = parseInt(prompt(`Введіть температуру за ${inputCounter} день.`))
+        sumTemperatures += userTemperature
+        questionsInput = confirm('Чи бажаєте ввести наступну температуру?')
+
+        while (questionsInput === true) {
+            inputCounter++
+            userTemperature = parseInt(prompt(`Введіть температуру за ${inputCounter} день.`))
+            sumTemperatures += userTemperature
+            questionsInput = confirm('Чи бажаєте ввести наступну температуру?')
+        }
+        averageValue = sumTemperatures / inputCounter
+        document.write(`Середнє значання температури за ${inputCounter} днів, складає ${(averageValue.toFixed(0))} градусів.`)
+    </script>
+</body>
+
+</html>

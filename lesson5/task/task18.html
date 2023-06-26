@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 19</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Задача 19</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            </p>Користувач поступово вводить прибуток магазину за кожен день протягом N тижнів. Знайти загальну
+            величину прибутку та вивести величину прибутку протягом кожного окремого тижня </p>
+
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        let indicatorDay = 0, indicatorWeek = 0, totalProfit = 0, daysNum = 1
+        let weekNum = confirm('Чи бажаєте ввести прибуток?')
+        while (weekNum === true) {
+
+            for (i = 0; i < 6; i++) {
+                indicatorDay = parseFloat(prompt(`Введіть прибуток ${daysNum}-го тижня за ${i + 1}-ий день.`))
+                indicatorWeek += indicatorDay
+            }
+            totalProfit += indicatorWeek
+            document.write(`Зальний прибуток за ${daysNum}-ий тиждень склав ${indicatorWeek.toFixed(2)} <br>`)
+            daysNum++
+            indicatorWeek = 0
+            weekNum = confirm(`Чи бажаєте ввести прибуток за ${daysNum}-ий тиждень?`)
+        }
+        document.write(`Зальний прибуток  за ${daysNum} тижнів склав ${totalProfit.toFixed(2)} <br>`)
+
+    </script>
+</body>
+
+</html>

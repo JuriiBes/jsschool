@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 11</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Задача 11</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            </p>Користувач загадує число. За 3 спроби комп’ютер намагається вгадати число користувача (використати confirm).</p>
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        const rangeStart = 1, rangeEnd= 10
+        const userNum = parseInt(prompt('Введіть загадане число від 1 до 10'))
+        for (let i = 0; i < 3; ) {
+            let compNum = rangeStart + (Math.floor(Math.random() * (rangeEnd - rangeStart+1)))
+            let result = confirm(`Загадане число ${compNum}`)
+            if(result ===true) {
+                document.write('Дякую за гру!') 
+                break } 
+                else i++
+        }
+        
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 15</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Задача 15</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            </p>Ігровий автомат. Випадково вибираємо зображення у 3 позиціях. Вибір у кожній позиції вибирається як
+            одне з чотирьох зображень. Вивести ці зображення і повідомити виграш користувача (три перших зображення
+            100 грн, три других – 200, три третіх – 500, три четвертих зображення – 1000грн). Використати цикли і
+            switch (для вибору зображення за номером).</p>
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        let rangeStart = 1, rangeEnd = 4
+        let sumImageNum = 0
+        for (let i = 0; i < 3; i++) {
+            let randomNumImage = rangeStart + (Math.floor(Math.random() * (rangeEnd - rangeStart + 1)))
+            document.write(`<img  src="../img/task14/img${randomNumImage}.png" style="width: 80px; height: 80px; margin-bottom: 25px;" alt="image"> `)
+            switch (randomNumImage) {
+                case 1: sumImageNum += 10
+                    break;
+                case 2: sumImageNum += 100
+                    break;
+                case 3: sumImageNum += 1000
+                    break;
+                case 4: sumImageNum += 10000
+                    break;
+            }
+        }
+        document.write('<br>')
+        switch (sumImageNum) {
+            case 30: document.write('Ви виграли 100 грн')
+                break;
+            case 300: document.write('Ви виграли 200 грн')
+                break;
+            case 3000: document.write('Ви виграли 500 грн')
+                break;
+            case 30000: document.write('Ви виграли 1000 грн')
+                break;
+            default: document.write('Спробуйте ще!')
+                break;
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 14</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Задача 14</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            </p>Знайти суму 5 непарних чисел, що знаходяться між заданими користувачем числами. </p>
+
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        let sumNumUser = 0
+        let userFirstNum = parseInt(prompt('Введіть перше число інтервалу'))
+        let userLaterNum = parseInt(prompt('Введіть друге число інтервалу'))
+        for (let notEvenNum = 0; notEvenNum < 5;) {
+            let randomCompNum = userFirstNum + (Math.floor(Math.random() * (userLaterNum - userFirstNum + 1)))
+            if (randomCompNum % 2 !== 0) {
+                sumNumUser += randomCompNum
+                notEvenNum++
+            }
+            else {
+                continue
+            }
+        }
+        document.write(`Сума 5-ти випадкових не парних числа рівна ${sumNumUser}`)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 5</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+
+  <body>
+    <h1>Задача 5</h1>
+    <div class="task__item">
+      <div class="task__condition">
+        <p>Створити 10 елементів для введення цін продуктів</p>
+      </div>
+      <a href="../index.html" class="task__link"
+        >Повернення на головну сторінку</a
+      >
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+      document.write(`<form>`);
+      for (let i = 0; i < 10; i++) {
+        document.write(`
+        <label>Product# ${
+          i + 1
+        } <input type="number" style="margin: 0 0 15px 25px; font-size: 20px"></label><br>
+        `);
+      }
+      document.write(`</form>`);
+    </script>
+  </body>
+</html>

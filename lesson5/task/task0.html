@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 1</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+
+  <body>
+    <h1>Задача 1</h1>
+    <div class="task__item">
+      <div class="task__condition">
+        <p>
+          Поступово генерувати 100 випадкових чисел від 1 до 1000. Підрахувати
+          яких чисел більше: парних чи непарних.
+        </p>
+      </div>
+      <a href="../index.html" class="task__link"
+        >Повернення на головну сторінку</a
+      >
+    </div>
+    <h2>Результат рішення</h2>
+    <script>
+      const rangeStart = 1,
+        rangeEnd = 1000;
+      let couplesNum = 0,
+        notEvenNum = 0;
+      for (let i = 0; i < 100; i++) {
+        let randomNum =
+          rangeStart + Math.floor(Math.random() * (rangeEnd - rangeStart + 1));
+        if (randomNum % 2 === 0) couplesNum++;
+        else notEvenNum++;
+      }
+      if (couplesNum > notEvenNum) {
+        document.write(`
+       <div>
+        Серед згенерованих чисел, парних чисел більше.
+        Парних чисел ${couplesNum}. Не парних чисел ${notEvenNum}.
+        </div>
+       `);
+      } else if (couplesNum < notEvenNum) {
+        document.write(`
+       <div>
+        Серед згенерованих чисел, не парних чисел більше.
+        Парних чисел ${couplesNum}. Не парних чисел ${notEvenNum}.
+        </div>
+       `);
+      } else
+        document.write(`
+       <div>
+        Серед згенерованих чисел рівенство.
+        Парних чисел ${couplesNum}. Не парних чисел ${notEvenNum}.
+        </div>
+       `);
+    </script>
+  </body>
+</html>

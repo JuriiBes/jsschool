@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 16</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Задача 16</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            </p>Морський бій. Комп’ютер випадково розташовує одиночний корабель на полі розміром N*M. Маючи К
+            снарядів користувач намагається потопити корабель. </p>
+
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        let battlefieldHeight = parseInt(prompt('Введіть кількість клітинок в висоту.'))
+        let battlefieldWidth = parseInt(prompt('Введіть кількість клітинок в ширину.'))
+        let numberShots = parseInt(prompt('Введіть кількість пострілів.'))
+
+        const placeShipHeight = 1 + (Math.floor(Math.random() * battlefieldHeight))
+        const placeShipWidth = 1 + (Math.floor(Math.random() * battlefieldWidth))
+
+        let shotsUserHeight
+        let shotsUserWidth
+
+        exit: do {
+            shotsUserHeight = parseInt(prompt('Ваша координата пострілу по У.'))
+            shotsUserWidth = parseInt(prompt('Ваша координата пострілу по Х.'))
+            numberShots--
+
+            if (shotsUserHeight === placeShipHeight && shotsUserWidth === placeShipWidth) {
+                document.write('Корабель потоплено. ')
+                break exit
+            } else {
+                if (numberShots > 0) {
+                    confirm(`Промах. Настурний постріл. Залишилось ${numberShots}. Готові?`)
+                } else
+                    break exit
+            }
+        }
+        while (numberShots > 0)
+
+        document.write(` Координати корабля: Y - ${placeShipHeight} X - ${placeShipWidth}`)
+
+    </script>
+</body>
+
+</html>

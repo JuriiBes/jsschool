@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 17</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Задача 17</h1>
+    <div class="task__item">
+
+        <div class="task__condition">
+            </p> Каса. Користувачу повідомляють суму, яку йому треба сплатити. Користувач поступово вводить суму
+            грошей до тих пір, поки суми не буде достатньо для оплати товарів (кожного разу користувачу
+            повідомляють, яку ще суму потрібно ввести). </p>
+
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        let rangeStart = 50, rangeEnd = 200
+        let cashNum = rangeStart + (Math.floor(Math.random() * (rangeEnd - rangeStart + 1)))
+
+        let amountReceived
+
+        amountReceived = parseFloat(prompt(`До сплати ${(cashNum.toFixed(2))} грн.`))
+        cashNum -= amountReceived
+
+        exit: while (cashNum) {
+            if (cashNum > 0) {
+                amountReceived = parseFloat(prompt(`До сплати залишилость ${(cashNum.toFixed(2))} грн.`))
+                cashNum -= amountReceived
+            } else if (cashNum === 0) {
+                document.write('Дякуємо за покупку.')
+                break exit
+            } else {
+                document.write('Дякуємо за покупку. ')
+                document.write(`Ваша решта ${(Math.abs(cashNum).toFixed(2))} грн.`)
+                break exit
+            }
+        }
+
+    </script>
+</body>
+
+</html>
