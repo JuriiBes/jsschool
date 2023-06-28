@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Натуральне число з n цифр є числом Армстронга, якщо сума степенів цифр, кожна з яких піднесена до n,
+        дорівнює самому числу (153=1*1*1+5*5*5+3*3*3). Отримати всі числа Армстронга для n=4 и n=3</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+
+    for (let numFour = 1; numFour <= 9; numFour++) {
+      for (let numThree = 1; numThree <= 9; numThree++) {
+        for (let numTwo = 1; numTwo <= 9; numTwo++) {
+          let numArmstrongThree = Math.pow(numFour, 3) + Math.pow(numThree, 3) + Math.pow(numTwo, 3)
+          let naturalNumThree = numFour * 100 + numThree * 10 + numTwo
+          if (numArmstrongThree === naturalNumThree) {
+            document.write(`${naturalNumThree} `)
+          }
+          for (let numOne = 1; numOne <= 9; numOne++) {
+            let numArmstrongFour = Math.pow(numFour, 4) + Math.pow(numThree, 4) + Math.pow(numTwo, 4) + Math.pow(numOne, 4)
+            let naturalNumFour = numFour * 1000 + numThree * 100 + numTwo * 10 + numOne
+            if (numArmstrongFour === naturalNumFour) {
+              document.write(`${naturalNumFour} `)
+            }
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

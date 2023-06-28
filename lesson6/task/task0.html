@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>
+        Отримати всі можливі способи розміщення п’яти книг різних авторів.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+  <script>
+    let combinationNum = 0
+    for (let i = 1; i < 6; i++) {
+
+      for (let x = 1; x < 6; x++) {
+
+        if (x !== i) {
+
+          for (let y = 1; y < 6; y++) {
+
+            if (y !== x && y !== i) {
+
+              for (let z = 1; z < 6; z++) {
+
+                if (z !== y && z !== i && z !== x) {
+
+                  for (let a = 1; a < 6; a++) {
+
+                    if (a !== i && a !== x && a !== y && a !== z) {
+
+                      let result = i * 10000 + x * 1000 + y * 100 + z * 10 + a
+                      document.write(`${result}  `)
+                      combinationNum++
+
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    document.write(`<br><br>Загалом ${combinationNum} комбінацій! `)
+  </script>
+</body>
+
+</html>
