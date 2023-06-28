@@ -35,18 +35,22 @@
 
     scheduleHours = startDayHours
     scheduleMinute = startDayMinute
+    function index(i) {
+      let result
+      if (i < 10)
+        result = '0'
+      else result = ''
+      return result
+    }
 
 
-
-    if (scheduleMinute < 10)
-      document.write(`Початок заняття: ${scheduleHours}:${scheduleMinute}0 - `)
-    else document.write(`Початок заняття: ${scheduleHours}:${scheduleMinute} - `)
+    document.write(`Початок заняття: ${index(scheduleHours)}${scheduleHours}:${index(scheduleMinute)}${scheduleMinute} - `)
     scheduleMinute += timeLesson
     if (scheduleMinute >= 60) {
       scheduleHours += Math.floor(scheduleMinute / 60)
       scheduleMinute = scheduleMinute % 60
     }
-    document.write(`Кінець заняття: ${scheduleHours}:${scheduleMinute} <br> `)
+    document.write(`Кінець заняття: ${index(scheduleHours)}${scheduleHours}:${index(scheduleMinute)}${scheduleMinute} <br> `)
     scheduleMinute += timePause
     numLesson--
 
@@ -54,28 +58,20 @@
       if (scheduleMinute >= 60) {
         scheduleHours += Math.floor(scheduleMinute / 60)
         scheduleMinute = scheduleMinute % 60
-        if (scheduleMinute < 10)
-          document.write(`Початок заняття: ${scheduleHours}:${scheduleMinute}0 - `)
-        else document.write(`Початок заняття: ${scheduleHours}:${scheduleMinute} - `)
+        document.write(`Початок заняття: ${index(scheduleHours)}${scheduleHours}:${index(scheduleMinute)}${scheduleMinute} - `)
         scheduleMinute += timeLesson
       } else {
-        if (scheduleMinute < 10)
-          document.write(`Початок заняття: ${scheduleHours}:${scheduleMinute}0 - `)
-        else document.write(`Початок заняття: ${scheduleHours}:${scheduleMinute} - `)
+        document.write(`Початок заняття: ${index(scheduleHours)}${scheduleHours}:${index(scheduleMinute)}${scheduleMinute} - `)
         scheduleMinute += timeLesson
       }
       if (scheduleMinute >= 60) {
         scheduleHours += Math.floor(scheduleMinute / 60)
         scheduleMinute = scheduleMinute % 60
-        if (scheduleMinute < 10)
-          document.write(`Кінець заняття: ${scheduleHours}:${scheduleMinute}0 <br> `)
-        else document.write(`Кінець заняття: ${scheduleHours}:${scheduleMinute} <br> `)
+        document.write(`Кінець заняття: ${index(scheduleHours)}${scheduleHours}:${index(scheduleMinute)}${scheduleMinute} <br> `)
 
         scheduleMinute += timePause
       } else {
-        if (scheduleMinute < 10)
-          document.write(`Кінець заняття: ${scheduleHours}:${scheduleMinute}0 <br> `)
-        else document.write(`Кінець заняття: ${scheduleHours}:${scheduleMinute} <br> `)
+        document.write(`Кінець заняття: ${index(scheduleHours)}${scheduleHours}:${index(scheduleMinute)}${scheduleMinute} <br> `)
         scheduleMinute += timePause
       }
     }
