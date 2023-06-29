@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 5</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 5</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька результатів:кількість парних,
+        кількість додатних, кількість більших за 100.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+
+    // function getCouplesNum(numOne, numTwo, numThree) {
+    //   let result = 0
+    //   if (numOne % 2 === 0) result++
+    //   if (numTwo % 2 === 0) result++
+    //   if (numThree % 2 === 0) result++
+    //   return result
+    // }
+    // function getPositiveNum(numOne, numTwo, numThree) {
+    //   let result = 0
+    //   if (numOne > 0) result++
+    //   if (numTwo > 0) result++
+    //   if (numThree > 0) result++
+    //   return result
+    // }
+    // function getGreaterThanHundred(numOne, numTwo, numThree) {
+    //   let result = 0
+    //   if (numOne > 100) result++
+    //   if (numTwo > 100) result++
+    //   if (numThree > 100) result++
+    //   return result
+    // }
+    // function mathResultForThreeNum(numOne, numTwo, numThree) {
+    //   document.write(`
+    //       Введені числа: ${numOne}, ${numTwo}, ${numThree}<br>
+    //       Кількість парних чисел: ${getCouplesNum(numOne, numTwo, numThree)}<br>
+    //       Кількість додатніх чисел: ${getPositiveNum(numOne, numTwo, numThree)}<br>
+    //       Кількість чисел більших за 100: ${getGreaterThanHundred(numOne, numTwo, numThree)}<br>
+    //     `)
+    // }
+    // let userNumOne = parseInt(prompt('Введіть перше число:'))
+    // let userNumTwo = parseInt(prompt('Введіть друге число:'))
+    // let userNumThree = parseInt(prompt('Введіть третє число:'))
+    // mathResultForThreeNum(userNumOne, userNumTwo, userNumThree)
+
+
+    function mathResultForThreeNum(arrThreeNum) {
+      let couplesNum = 0, positiveNum = 0, greaterThanHundred = 0
+      arrThreeNum.forEach(element => {
+        if (element % 2 === 0) couplesNum++
+      })
+      arrThreeNum.forEach(element => {
+        if (element > 0) positiveNum++
+      })
+      arrThreeNum.forEach(element => {
+        if (element > 100) greaterThanHundred++
+      })
+      document.write(`
+          Введені числа: ${arrThreeNum[0]}, ${arrThreeNum[1]}, ${arrThreeNum[2]}<br>
+          Кількість парних чисел: ${couplesNum}<br>
+          Кількість додатніх чисел: ${positiveNum}<br>
+          Кількість чисел більших за 100: ${greaterThanHundred}<br>
+        `)
+    }
+    let arrNum = []
+    for (let i = 0; i < 3; i++) {
+      let userNum = parseFloat(prompt(`Введіть ${i + 1}-е число:`))
+      arrNum.push(userNum)
+    }
+    mathResultForThreeNum(arrNum)
+
+  </script>
+</body>
+
+</html>

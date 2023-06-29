@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити функцію, яка за номером місяця повертає пору року, до якої відноситься цей місяць.</p>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+  <script>
+
+    function season(numMonth) {
+      let result
+      switch (numMonth) {
+        case 1:
+        case 2:
+        case 12: result = 'Зима'
+          break;
+        case 3:
+        case 4:
+        case 5: result = 'Весна'
+          break;
+        case 6:
+        case 7:
+        case 8: result = 'Літо'
+          break;
+        case 9:
+        case 10:
+        case 11: result = 'Осінь'
+          break;
+        default: result = 'Не вірно введенний номер місяця.'
+          break
+      }
+      return result
+    }
+    let monthUser = parseInt(prompt('Введіть номер місяця.'))
+    if (1 <= monthUser && monthUser <= 12)
+      document.write(`Введений номер місяця відноситься до пори року - ${season(monthUser)}.`)
+    else document.write(season(monthUser))
+  </script>
+</body>
+
+</html>
