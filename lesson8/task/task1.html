@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано масив, який зберігає кількість відвідувачів магазину протягом тижня. Вивести на екран:
+        • номери днів, протягом яких кількість відвідувачів була меншою за 20;
+        • номери днів, коли кількість відвідувачів була мінімальною;
+        • номери днів, коли кількість відвідувачів була мaксимальною;
+        • загальну кількість клієнтів у робочі дні та окремо загальну кількість днів на вихідних.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    // Функція знаходження днів з кількістю клієнтів меншою за 20
+    function daysLessTwenty(arrNumClientsWeeks) {
+      let dayLessTwenty = []
+      arrNumClientsWeeks.forEach((element, index) => {
+        if (element < 20) dayLessTwenty.push(index + 1)
+      });
+      return dayLessTwenty
+    }
+
+    // Функція знаходження дня з найменшою кількістю відвідувачів
+    function dayMinClientsToWeek(arrNumClientsWeeks) {
+      let dayMinClients = arrNumClientsWeeks[0]
+      let minNumDayClients = 1
+
+      for (let i = 1; i < arrNumClientsWeeks.length; i++) {
+        if (dayMinClients > arrNumClientsWeeks[i]) {
+          dayMinClients = arrNumClientsWeeks[i]
+          minNumDayClients = i + 1
+        }
+      }
+      return minNumDayClients
+    }
+
+    // Функція знаходження дня з найбільшою кількістю відвідувачів
+    function dayMaxClientsToWeek(arrNumClientsWeeks) {
+      let dayMaxClients = arrNumClientsWeeks[0]
+      let maxNumDayClients = 1
+
+      for (let i = 1; i < arrNumClientsWeeks.length; i++) {
+        if (dayMaxClients < arrNumClientsWeeks[i]) {
+          dayMaxClients = arrNumClientsWeeks[i]
+          maxNumDayClients = i + 1
+        }
+      }
+      return maxNumDayClients
+    }
+
+    // Функція знаходження загальної кількості клієнтів в будні дні та вихідні
+    function numClientsToWeek(arrNumClientsWeeks) {
+      let numClientsWorkDay = 0, numClientsDayOff = 0
+      let arrNumClientsToWeek = []
+      for (let i = 0; i < arrNumClientsWeeks.length; i++) {
+        if (i < 5) {
+          numClientsWorkDay += arrNumClientsWeeks[i]
+        } else numClientsDayOff += arrNumClientsWeeks[i]
+      }
+      arrNumClientsToWeek.push(numClientsWorkDay)
+      arrNumClientsToWeek.push(numClientsDayOff)
+      return arrNumClientsToWeek
+    }
+    // Розв'язок
+    let numClientsWeeks = []
+
+    for (let i = 0; i < 7; i++) {
+      let numClient = parseInt(prompt(`Введіть кількість клієнтів за ${i + 1}-ий день:`))
+      numClientsWeeks.push(numClient)
+    }
+    // Відразу хочу запитати. Чи варто створювати додаткові змінні, що збільшує код? 
+    // Буде рахуватись за помилку виклик функції, відразу при виводі результату (без використання додаткових змінних)?
+    let numDaysLessTwenty = daysLessTwenty(numClientsWeeks)
+    let numDaysMin = dayMinClientsToWeek(numClientsWeeks)
+    let numDaysMax = dayMaxClientsToWeek(numClientsWeeks)
+    let sumNumDays = numClientsToWeek(numClientsWeeks)
+
+
+    document.write(`
+        Номери днів, протягом яких кількість відвідувачів була меншою за 20 є: ${numDaysLessTwenty}.<br>
+        Номер дня, коли кількість відвідувачів була мінімальною є: ${numDaysMin}.<br>
+        Номер дня, коли кількість відвідувачів була мaксимальною є: ${numDaysMax}.<br>
+        Загальна кількість клієнтів у робочі дні складає ${sumNumDays[0]} осіб. В вихідні дні ${sumNumDays[1]} осіб.
+    `)
+  </script>
+</body>
+
+</html>

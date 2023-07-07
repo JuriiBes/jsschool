@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 7</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 7</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:
+        1) за весь рік;
+        2) у першійполовині року;
+        3) у другійполовині року;
+        4) за літо;
+        5) за ІІ квартал;
+        6) за парнімісяці (з парними номерами);
+        7) за місяці, які є початковими у сезоні (весна, літо, осінь, зима).
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+
+    function sumMoneyYear(arrMoney) {
+      let sumMoney = 0
+      arrMoney.forEach(element => {
+        sumMoney += element
+      });
+      return sumMoney
+    }
+
+    function sumMoneyFirstSecondSixMonths(arrMoney) {
+      let sumMoney = []
+      let sumMoneyFirst = 0, sumMoneySecond = 0
+      arrMoney.forEach((element, index) => {
+        if (index < 6) sumMoneyFirst += element
+        else sumMoneySecond += element
+      });
+      sumMoney.push(sumMoneyFirst)
+      sumMoney.push(sumMoneySecond)
+      return sumMoney
+    }
+
+    function sumMoneySummer(arrMoney) {
+      let sumMoney = 0
+      for (let i = 5; i < 8; i++) {
+        sumMoney += arrMoney[i]
+      }
+      return sumMoney
+    }
+
+    function sumMoneySecondQuarter(arrMoney) {
+      let sumMoney = 0
+      for (let i = 3; i < 6; i++) {
+        sumMoney += arrMoney[i]
+      }
+      return sumMoney
+    }
+
+    function sumMoneyEvenMonths(arrMoney) {
+      let sumMoney = 0
+      arrMoney.forEach((element, index) => {
+        if (index % 2 !== 0) sumMoney += element
+      });
+      return sumMoney
+    }
+
+    function sumMoneyStartSeasons(arrMoney) {
+      let sumMoney = 0
+      for (let i = 2; i < arrMoney.length; i = i + 3) {
+        sumMoney += arrMoney[i]
+      }
+      return sumMoney
+    }
+
+
+    let arrMoneyYear = []
+    for (let i = 0; i < 12; i++) {
+      let moneyMonth = parseFloat(prompt(`Введіть суму за ${i + 1}-ий місяць:`))
+      arrMoneyYear.push(moneyMonth)
+    }
+    let moneyFirstSecondSixMonths = sumMoneyFirstSecondSixMonths(arrMoneyYear)
+
+    document.write(`
+      Сума за весь рік складає: ${sumMoneyYear(arrMoneyYear)} $; <br>
+      Сума у першійполовині року складає: ${moneyFirstSecondSixMonths[0]} $; <br>
+      Сума у другійполовині року складає: ${moneyFirstSecondSixMonths[1]} $; <br>
+      Сума за літо складає: ${sumMoneySummer(arrMoneyYear)} $; <br>
+      Сума за ІІ квартал складає: ${sumMoneySecondQuarter(arrMoneyYear)} $; <br>
+      Сума за парнімісяці (з парними номерами)складає: ${sumMoneyEvenMonths(arrMoneyYear)} $; <br>
+      Сума за місяці, які є початковими у сезоні (весна, літо, осінь, зима)складає: ${sumMoneyStartSeasons(arrMoneyYear)} $;
+    `)
+
+
+  </script>
+</body>
+
+</html>

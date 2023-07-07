@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 5</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 5</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано послідовність оцінок учня. Підрахувати кількість:
+        1) двійок
+        2) кількість хороших оцінок (добре, відмінно);
+        3) кількість оцінок, які нижче середнього.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+
+    function numRatingTwo(arrRating) {
+      let numRatingTwo = 0
+      arrRating.forEach(element => {
+        if (element === 2) numRatingTwo++
+      });
+      return numRatingTwo
+    }
+
+    function numGoodRating(arrRating) {
+      let numGoodRating = 0
+      arrRating.forEach(element => {
+        if (element >= 4) numGoodRating++
+      });
+      return numGoodRating
+    }
+
+    function numLessGoodRating(arrRating) {
+      let numLessGoodRating = 0
+      let averageValue = 0, sumRating = 0
+
+      arrRating.forEach(element => {
+        sumRating += element
+      });
+      averageValue = sumRating / arrRating.length
+
+      arrRating.forEach(element => {
+        if (element < averageValue) numLessGoodRating++
+      });
+      return numLessGoodRating
+    }
+
+    let arrRatingsStudent = []
+    let questionInputNextRating, ratingTwo, goodRating, lessGoodRating
+
+    do {
+      let ratingStudent = parseInt(prompt('Введіть оцінку учня:'))
+      arrRatingsStudent.push(ratingStudent)
+      questionInputNextRating = confirm('Бажаєте ввести наступну оцінку учня?')
+    } while (questionInputNextRating === true)
+
+    ratingTwo = numRatingTwo(arrRatingsStudent)
+    goodRating = numGoodRating(arrRatingsStudent)
+    lessGoodRating = numLessGoodRating(arrRatingsStudent)
+
+    document.write(`
+    Кількість двійок рівна: ${ratingTwo};<br>
+    Кількість хороших оцінок (добре, відмінно) рівна: ${goodRating};<br>
+    Кількість оцінок, які нижче середнього рівна: ${lessGoodRating};
+    `)
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано масив, який містить оцінки з К предметів. Знайти середній бал і з’ясувати до якої категорії він
+        відноситься (відмінник, двійочник (має хоча би одну двійку), хорошист (оцінки добре і відмінно),
+        трійочник(є хоча би одна трійка)).</p>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+
+  <script>
+
+    // Функція розрахунку середньої оцінки
+    function getAverageScore(studentScoresArr) {
+      let sumScoresStudent = 0
+      for (let i = 0; i < studentScoresArr.length; i++) {
+        sumScoresStudent += studentScoresArr[i]
+      }
+      let averageScoreDiscipline = Math.floor(sumScoresStudent / studentScoresArr.length)
+      return averageScoreDiscipline
+    }
+
+
+    // Функція визначення категорії студента
+    function getCategoriesScoresStudent(arrScores) {
+      let goodScoresNum = 0
+      let threeScoresNum = 0
+      let result
+
+      // Перевіряємо оцінки на присутність 2
+      arrScores.forEach(element => {
+        if (element > 2) goodScoresNum++
+      });
+
+      // Перевіряємо оцінки на присутність 3
+      arrScores.forEach(element => {
+        if (element === 3) threeScoresNum++
+      });
+
+      // якщо 2-йок не має
+      if (goodScoresNum === arrScores.length) {
+
+        // і 3-йок теж
+        if (threeScoresNum === 0) {
+          let averageScoreStudent = getAverageScore(arrScores)
+          switch (averageScoreStudent) {
+            case (4):
+              result = 'хорошист'
+              break;
+            case (5):
+              result = 'відмінник'
+              break;
+          }
+
+        } else result = 'трійочник'
+
+      } else result = 'двійочник' // інакше:(
+      return result
+    }
+
+    //Створення масиву оцінок
+    let arrScoresStudent = []
+    let disciplineNum = parseInt(prompt('Введіть кількість дисциплін оцінювання:'))
+    let studentScoreDiscipline
+
+
+    // Створення масиву оцінок
+    for (let i = 0; i < disciplineNum; i++) {
+      let studentScoreDiscipline = parseInt(prompt(`Введіть оцінку за ${i + 1}-у дисципліну:`))
+      if (0 < studentScoreDiscipline && studentScoreDiscipline <= 5) {
+        arrScoresStudent.push(studentScoreDiscipline)
+      } else {
+        alert('Введенна не коректна оцінка. Повторіть спробу')
+        i--
+        continue
+      }
+    }
+
+    // Розрахунки та виведення результату
+
+    let resultScores = getCategoriesScoresStudent(arrScoresStudent)
+    if (resultScores !== 'двійочник' && resultScores !== 'трійочник') {
+      document.write(`
+        Середня оцінка студента ${getAverageScore(arrScoresStudent).toFixed(0)}<br>
+        Він є ${resultScores}.
+         `)
+    } else {
+      if (resultScores !== 'двійочник') {
+        document.write(` Студент є ${resultScores}.`)
+      } else
+        document.write(` Студент є ${resultScores}.`)
+    }
+  </script>
+</body>
+
+</html>

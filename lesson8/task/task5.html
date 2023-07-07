@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 6</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 6</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано послідовність цін товарів та назв (у окремих масивах). Вивести на екран ті, які може собі
+        дозволити користувач (кількість грошей задається).
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    let arrNameProducts = [' Ліки', ' Капуста', ' Хліб', ' Цукерки', ' Морозиво', ' Автомобіль', ' Мотоцикл', ' Вода', ' Кавун', ' Ковбаса']
+    let arrPriceProducts = [150, 65, 30, 99, 45, 2500, 1500, 16, 28, 128]
+    let arrPossibilityPurchase = []
+
+    let numMoneyClient = parseFloat(prompt('Яку суму коштів Ви готові витратити на закупівлю продуктів?'))
+
+    arrPriceProducts.forEach((element, index) => {
+      if (element < numMoneyClient)
+        arrPossibilityPurchase.push(arrNameProducts[index])
+    })
+
+    document.write(`Список можливих покупок наступний: <br>${arrPossibilityPurchase}`)
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 9</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 9</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Морський бій. Користувач вводить кількість клітинок одновимірного масиву та кількість одиночних
+        кораблів. Комп’ютер довільно розміщує ці одиночні кораблі у масиві по один у клітинці (якщо у
+        клітинці 0, то клітинка пуста, якщо 1 – то це означає, що там є корабель. Користувач вводить номер
+        клітинки, куди стріляє. Гра продовжується до тих пір, поки не будуть потоплені усі кораблі.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    let sizeBattlefield = parseInt(prompt('Введіть кількість клітинок поля для гри:'))
+    let arrSizeBattlefield = new Array(sizeBattlefield)
+    arrSizeBattlefield.fill(0)
+    let numShip = parseInt(prompt('Введіть кількість кораблів:'))
+    for (let i = 0; i < numShip;) {
+      let randShipPosition = 1 + Math.floor(Math.random() * sizeBattlefield)
+      if (arrSizeBattlefield[randShipPosition - 1] === 0) {
+        arrSizeBattlefield[randShipPosition - 1] = 1
+        i++
+      }
+    }
+
+    do {
+      let shotUser = prompt(`Виберіть клітинку для пострілу від 1 до ${sizeBattlefield}:`)
+      if (arrSizeBattlefield[shotUser - 1] === 1) {
+        arrSizeBattlefield[shotUser - 1] = 0
+        numShip--
+        alert('Корабель потоплено!!!')
+      }
+    } while (numShip !== 0)
+
+    document.write('Всі кораблі потоплено.')
+
+
+  </script>
+</body>
+
+</html>

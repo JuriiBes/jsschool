@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 8</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 8</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим
+        чином значеннями від -500 до 500). Надаючи користувачу можливість вибирати номери елементів (поки
+        він не відмовиться). Знаходити сумарний виграш.</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    let startRating = -500, endRating = 500
+    let arrWinningAmount = []
+    let userNum, questionInsertNum, sumMoneyWinning = 0
+    let arrUserNum = []
+    let arrUserWinning = []
+    for (let i = 0; i < 20; i++) {
+      let randMoneyWinning = startRating + Math.floor(Math.random() * (endRating - startRating + 1))
+      arrWinningAmount.push(randMoneyWinning)
+    }
+
+    do {
+      userNum = parseInt(prompt('Введіть номер від 1 до 20:'))
+      arrUserNum.push(userNum)
+      arrUserWinning.push(arrWinningAmount[userNum - 1])
+      sumMoneyWinning += arrWinningAmount[userNum - 1]
+
+
+      questionInsertNum = confirm(`Ваш виграш складає: ${sumMoneyWinning}. Ви бажаєте грати далі?`)
+    } while (questionInsertNum === true)
+
+    document.write(`
+    Вибрані вами номери: ${arrUserNum} $; <br>
+    Суми, які знаходились під Вашими номерами: ${arrUserWinning} $; <br>
+    Ваш виграш складає: ${sumMoneyWinning}$
+    `)
+
+
+  </script>
+</body>
+
+</html>

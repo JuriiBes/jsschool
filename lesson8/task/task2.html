@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 3</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 3</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано масив імен учнів. З’ясувати скільки разів зустрічається ім’я «Іван».
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    let arrNameStudents = []
+    let nameIvan = 0
+    let questionNextName
+    do {
+      let nameStudent = prompt('Введіть ім"я учня:')
+      arrNameStudents.push(nameStudent)
+      questionNextName = confirm('Бажаєте ввести ім"я наступного учня?')
+    } while (questionNextName === true)
+
+    arrNameStudents.forEach(element => {
+      if (element === 'Іван') nameIvan++
+    });
+
+    document.write(`Ім"я Іван зустрічається ${nameIvan} раз(и).`)
+  </script>
+</body>
+
+</html>
