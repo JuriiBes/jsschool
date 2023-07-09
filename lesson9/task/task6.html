@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 7</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 7</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано масив цін. Змінити цей масив так, що на ціни товарів, які більші за 1000 грн. дати 30% знижки.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    let startRange = 0, endRange = 2000
+    let arrRandomNum = []
+    for (let i = 0; i < 10; i++) {
+      let randNum = startRange + Math.floor(Math.random() * (endRange - startRange + 1))
+      arrRandomNum.push(randNum)
+    }
+    document.write(`Ціни до знижки: ${arrRandomNum}<br>`)
+    firstElementArr = arrRandomNum[0]
+
+    for (let i = 0; i < arrRandomNum.length; i++) {
+      if (arrRandomNum[i] > 1000)
+        arrRandomNum[i] = Math.floor(arrRandomNum[i] * 0.7)
+    }
+    document.write(`Ціни зі знижкою 30%, для продуктів дорожчих за 1000 грн: ${arrRandomNum}`)
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 10</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <h1>Задача 10</h1>
+    <div class="task__item">
+        <div class="task__condition">
+            <p>Дано масив цін у грн. Податок складає 20%. Сформувати масив, який буде містити величину сплаченого
+                податку у грн.
+            </p>
+        </div>
+        <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+    </div>
+    <h2>Результат рішення</h2>
+
+    <script>
+        let arrSalePrice = ['125', '454', '885', '224', '445', '455']
+        let sumVat = 0
+        let arrVat = []
+
+        arrSalePrice.forEach(element => {
+            let calculationVat = element * 0.2
+            arrVat.push(calculationVat.toFixed(2))
+            sumVat += calculationVat
+        });
+
+
+        document.write(`Ціни продажу: ${arrSalePrice} <br> Суми сплачeного податку: ${arrVat}<br> Загальна сума податку: ${sumVat.toFixed(2)}`)
+    </script>
+</body>
+
+</html>

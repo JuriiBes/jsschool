@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Користувач вводить кількість елементів. Створити масив, у якому перша половина заповнена 1-цями, а друга
+        заповнена 7-ками.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    let userNum = parseInt(prompt('Введіть кількість елементів для створення масиву.'))
+
+    let arrUser = new Array(userNum)
+
+    let halfArr = Math.floor(userNum / 2)
+
+    arrUser.fill(1, 0, halfArr)
+    arrUser.fill(7, halfArr)
+
+    document.write(arrUser)
+  </script>
+</body>
+
+</html>
