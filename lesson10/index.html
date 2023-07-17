@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ua">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="js/script.js" defer></script>
+    <title>Home task 10</title>
+</head>
+
+<body>
+    <h1>Домашня робота <br> урок№10</h1>
+    <h2>Масиви</h2>
+    <div class="task__container">
+        <div class="task__item">
+            <div class="task__title">Задача</div>
+            <div class="task__condition">
+                <p>Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000)</p>
+                <ul style="padding-left: 35px;">
+                    <li>Сформувати новий масив, у якому є тільки ті, що більші за 1000 грн</li>
+                    <li>Сформувати новий масив, у якому є номери тільки тих, що більші за 1000 грн</li>
+                    <li>Сформувати список з тих цін, які більші за попереднє значення</li>
+                    <li>Сформувати новий масив, що міститиме значення цін у відсотках стосовно максимального</li>
+                    <li>Підрахувати кількість змін цін</li>
+                    <li>Визначити, чи є ціна, що менше 1000</li>
+                    <li>Визначати, чи усі ціни більше за 1000</li>
+                    <li>Підрахувати кількість цін, що більше за 1000</li>
+                    <li>Підрахувати суму цін, що більше за 1000</li>
+                    <li>Знайти першу ціну, що більше за 1000</li>
+                    <li>Знайти індекс першої ціни, що більше за 1000</li>
+                    <li>Знайти останню ціну, що більше за 1000</li>
+                    <li>Знайти індекс останньої ціни, що більше за 1000</li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            // Створення масиву цін на папери за вказаний користувачем період
+            let arrPriceSecurities = []
+            function createPriceSecurities() {
+                const startPrice = 1; endPrice = 10000
+                let userPeriodTime = parseInt(prompt('Введіть за який період часу, будемо переглядати історію цін. Прошу ввести кількість місяців.'))
+                for (let i = 0; i < userPeriodTime; i++) {
+                    let priceRand = startPrice + Math.floor(Math.random() * endPrice)
+                    arrPriceSecurities.push(priceRand)
+                }
+                return arrPriceSecurities
+            }
+
+            createPriceSecurities()
+
+            // Створення масиву цін, які більші за 1000
+            let priceMoreThousand = arrPriceSecurities.filter(element => element > 1000)
+
+            // Створення масиву номерів цін, ціна яких більша за 1000
+            let arrIndexMoreThousand = []
+            arrPriceSecurities.forEach(
+                (el, index) => {
+                    if (el > 1000) arrIndexMoreThousand.push(index)
+                }
+            )
+
+            //формувємо список з тих цін, які більші за попереднє значення</li>
+            let numMorePrevious = arrPriceSecurities.filter(
+                (el, index, arr) => (el > arr[index - 1])
+            )
+
+            // формувємо новий масив, що містить значення ціни у відсотках стосовно максимального
+            function maxElement(array) {
+                let maxEl = array[0]
+                array.forEach(element => {
+                    if (element > maxEl) maxEl = element
+                })
+                return maxEl
+            }
+            maxPrices = maxElement(arrPriceSecurities)
+            let percentageRatio = arrPriceSecurities.map(
+                element => Math.floor((element / maxPrices) * 100)
+            )
+
+            // Підраховуємо кількість змін цін
+            let numChangePrice = arrPriceSecurities.reduce(
+                (changePrice, el, index, arr) => el !== arr[index + 1] ? changePrice + 1 : changePrice,
+                0)
+            resultNumChangePrice = numChangePrice - 1
+
+            // Визначити, чи є ціна, що менше 1000
+            let includePrise = arrPriceSecurities.some(el => el < 1000)
+            if (includePrise === true) resultInc = 'Yes'
+            else resultInc = 'No'
+
+            // Визначати, чи усі ціни більше за 1000
+            let allPrise = arrPriceSecurities.every(el => el > 1000)
+            if (allPrise === true) resultAll = 'Yes'
+            else resultAll = 'No'
+
+            // Підрахувати кількість цін, що більше за 1000
+            let sumMoreThousand = arrPriceSecurities.reduce(
+                (sumMore, el) => el > 1000 ? sumMore + 1 : sumMore,
+                0
+            )
+
+            // Підрахувати суму цін, що більше за 1000
+            let sumPriceMoreThousand = arrPriceSecurities.reduce(
+                (sumMore, el) => el > 1000 ? sumMore += el : sumMore,
+                0
+            )
+
+            // Знайти першу ціну, що більше за 1000
+            let firstPriceMoreThousand = arrPriceSecurities.find(el => el > 1000)
+
+            // Знайти індекс першої ціни, що більше за 1000
+            let firstIndexMoreThousand = arrPriceSecurities.findIndex(el => el > 1000)
+
+            // Знайти останню ціну, що більше за 1000
+            let lastPriceMoreThousand = arrPriceSecurities.findLast(el => el > 1000)
+
+            // Знайти індекс останньої ціни, що більше за 1000
+            let lastIndexMoreThousand = arrPriceSecurities.findLastIndex(el => el > 1000)
+
+
+            document.write(`
+            Масив цін: <span>${arrPriceSecurities}</span>
+            <ul class="result-output">
+                    <li>Mасив, у якому є тільки ті, що більші за 1000 грн:   <span>${priceMoreThousand}</span></li>
+                    <li>Масив, у якому є номери тільки тих, що більші за 1000 грн:   <span>${arrIndexMoreThousand}</span></li>
+                    <li>Список з тих цін, які більші за попереднє значення:   <span>${numMorePrevious}</span></li>
+                    <li>Новий масив, що містить значення цін у відсотках стосовно максимального:   <span>${percentageRatio}</span></li>
+                    <li>Кількість змін цін:   <span>${resultNumChangePrice}</span></li>
+                    <li>Ціни менші 1000:   <span>${resultInc}</span></li>
+                    <li>Всі ціни більші за 1000:   <span>${resultAll}</span></li>
+                    <li>Кількість цін, що більші за 1000:   <span>${sumMoreThousand}</span></li>
+                    <li>Сума цін, що більші за 1000:   <span>${sumPriceMoreThousand}</span></li>
+                    <li>Перша ціна, що більше за 1000:   <span>${firstPriceMoreThousand}</span></li>
+                    <li>Індекс першої ціни, що більша за 1000:   <span>${firstIndexMoreThousand}</span></li>
+                    <li>Остання ціна, що більша за 1000:   <span>${lastPriceMoreThousand}</span></li>
+                    <li>Індекс останньої ціни, що більша за 1000:   <span>${lastIndexMoreThousand}</span></li>
+                </ul>
+            `)
+
+
+
+        </script>
+</body>
+
+</html>
