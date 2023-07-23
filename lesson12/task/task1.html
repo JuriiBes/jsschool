@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування
+        змішуванням.</p>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    function createArr(minValue, maxValue) {
+      let arrNum = []
+      for (let i = 0; i < 30; i++) {
+        let arrElement = minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+        arrNum.push(arrElement)
+      }
+      return arrNum
+    }
+    let minValueArrEl = parseInt(prompt('Введіть мінімальне можливе значення числа масиву:'))
+    let maxValueArrEl = parseInt(prompt('Введіть максимальне можливе значення числа масиву:'))
+
+    let arrayForSort = createArr(minValueArrEl, maxValueArrEl)
+    document.write(`Масив до сортування: <br>${arrayForSort}<br><br>`)
+
+    let counterChange = 0
+    let leftIndex = 0
+    let rightIndex = arrayForSort.length - 1
+
+    while (leftIndex < rightIndex) {
+      for (let index = leftIndex; index < rightIndex; index++) {
+        if (arrayForSort[index] > arrayForSort[index + 1]) {
+          let temp = arrayForSort[index]
+          arrayForSort[index] = arrayForSort[index + 1]
+          arrayForSort[index + 1] = temp
+          counterChange++
+        }
+      }
+      rightIndex--
+      for (let index = rightIndex; index > leftIndex; index--) {
+        if (arrayForSort[index] < arrayForSort[index - 1]) {
+          let temp = arrayForSort[index]
+          arrayForSort[index] = arrayForSort[index - 1]
+          arrayForSort[index - 1] = temp
+          counterChange++
+        }
+      }
+      leftIndex++
+    }
+
+    document.write(`Впорядкований масив:<br>${arrayForSort}<br><br>Масив з 30 компонентів був впорядкований за ${counterChange} обмінів.`)
+
+  </script>
+</body>
+
+</html>

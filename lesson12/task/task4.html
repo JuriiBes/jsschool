@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 5</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 5</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я
+        «Olga»і під яким індексом. </li>
+        </ul>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    let arrName = ["Don", "Ion", "Franklin", "Sem", "Olga", "Fred", "Sara", "Anna", "Dana"]
+
+    arrName.sort()
+
+    function binarySearchIndex(arr, searchEl) {
+      let start = 0
+      let end = arr.length - 1
+      while (start <= end) {
+        let middle = Math.floor((start + end) / 2)
+        if (arr[middle] === searchEl) return middle
+        if (arr[middle] < searchEl) start = middle + 1
+        if (arr[middle] > searchEl) end = middle - 1
+      }
+      return -1
+    }
+
+    let findIndexSearchEl = binarySearchIndex(arrName, "Olga")
+
+    if (findIndexSearchEl !== -1) {
+      document.write(`Ім'я Olga, в упорядкованому масиві знаходиться під номером ${findIndexSearchEl}`)
+    }
+    else document.write(`Ім'я Olga, в даному масиві відсутнє`)
+
+
+    document.write(`<br><br><br>${arrName}`)
+
+  </script>
+</body>
+
+</html>

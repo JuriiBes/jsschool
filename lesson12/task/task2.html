@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 3</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 3</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>
+        Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування
+        включеннями.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+
+  <script>
+
+    function createArr(minValue, maxValue) {
+      let arrNum = []
+      for (let i = 0; i < 30; i++) {
+        let arrElement = minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+        arrNum.push(arrElement)
+      }
+      return arrNum
+    }
+
+    let minValueArrEl = parseInt(prompt('Введіть мінімальне можливе значення числа масиву:'))
+    let maxValueArrEl = parseInt(prompt('Введіть максимальне можливе значення числа масиву:'))
+
+    let arrayForSort = createArr(minValueArrEl, maxValueArrEl)
+    document.write(`Масив до сортування: <br>${arrayForSort}<br><br>`)
+
+    let counterChange = 0
+
+    for (let k = 0; k < arrayForSort.length; k++) {
+      const currentEl = arrayForSort[k]
+      let i = k - 1
+      while (i >= 0 && arrayForSort[i] > currentEl) {
+        arrayForSort[i + 1] = arrayForSort[i]
+        i = i - 1
+        counterChange++
+      }
+      arrayForSort[i + 1] = currentEl
+
+    }
+
+
+    document.write(`Впорядкований масив:<br>${arrayForSort}<br><br>Масив з 30 компонентів був впорядкований за ${counterChange} обмінів.`)
+  </script>
+</body>
+
+</html>
