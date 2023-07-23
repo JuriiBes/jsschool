@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано інформацію про прибуток К магазинів протягом тижня. Знайти : </p>
+      <ul>
+        <li>загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за
+          вівторок, і т.д.);</li>
+        <li>сформувати загальний список (одновимірний масив) зі значенням, які більші за 500</li>
+        <li>відсортувати кожен тиждень за зростанням</li>
+        <li>відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при
+          порівнянні рядків потрібно порівнювати максимальні елементи у кожному з цих рядків</li>
+        <li>упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків
+          треба знайти суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який
+          з
+          елементів повинен іти раніше).</li>
+      </ul>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    function outputArr(arrForOutput) {
+      for (let i = 0; i < arrForOutput.length; i++) {
+        document.write(`<span>${arrForOutput[i]}</span><br>`)
+      }
+    }
+    function sumWeek(days) {
+      let arrSumWeek = []
+      for (let i = 0; i < days; i++) {
+        let randNum = Math.floor(Math.random() * 1000)
+        arrSumWeek.push(randNum)
+      }
+      return arrSumWeek
+    }
+
+    function getArrSumShops(shops, sumDays) {
+      let arrSumShopsWeek = []
+      for (let i = 0; i < shops; i++) {
+        let cashShopWeek = sumWeek(sumDays)
+        arrSumShopsWeek.push(cashShopWeek)
+      }
+      return arrSumShopsWeek
+    }
+
+    let numShops = parseInt(prompt('Введіть кількість магазинів для формування масиву прибутків.'))
+
+    let arrCashShopsWeek = getArrSumShops(numShops, 7)
+
+    // функція підрахунку суми прибутку по днях
+    function getSumProfitByDays(arrCash, shops) {
+      let profitByDays = []
+      let sumByDay = 0
+      for (let j = 0; j < arrCash[0].length; j++) {
+        for (let i = 0; i < shops; i++) {
+          sumByDay += arrCash[i][j]
+        }
+        profitByDays.push(sumByDay)
+        sumByDay = 0
+      }
+      return profitByDays
+    }
+
+    // функція генерування масиву з сумами більшими за 500
+    function getArrMoreHundred(arrCash) {
+      let arrSingleLevel = arrCash.flat()
+      let arrProfitMoreHundred = arrSingleLevel.filter(
+        element => element > 500
+      )
+      return arrProfitMoreHundred
+    }
+
+    // Функція сортування потижневого прибутку за зростанням
+    function getSortInWeek(arrCash) {
+      let newArrForSort = JSON.parse(JSON.stringify(arrCash))
+      for (let i = 0; i < arrCash.length; i++) {
+        newArrForSort[i].sort((a, b) => a - b)
+      }
+      return newArrForSort
+    }
+
+    // Сортування масиву за спаданням максимального  значення в тижні, та по загальним сумам 
+
+
+    function arrSumElementWeek(arrCash) {
+      let newArrForSort = []
+      for (let i = 0; i < arrCash.length; i++) {
+        let sumElInWeek = arrCash[i].reduce((sumEl, element) => sumEl + element,
+          0)
+        newArrForSort.push(sumElInWeek)
+      }
+      return newArrForSort
+    }
+
+
+    function arrMaxEl(arrCash) {
+      let newArrForSort = []
+      for (let i = 0; i < arrCash.length; i++) {
+        let maxElInWeek = arrCash[i].reduce((maxEl, element) => element > maxEl ? maxEl = element : maxEl,
+          0)
+        newArrForSort.push(maxElInWeek)
+      }
+      return newArrForSort
+    }
+
+
+    function getSortMaxToMin(arrCash, func) {
+      let arrForSort = JSON.parse(JSON.stringify(arrCash))
+      let newArrForSort = func(arrForSort)
+
+      const valueForSort = newArrForSort.length - 2
+
+      for (let i = 0; i <= valueForSort; i++) {
+        let maxElIndex = i
+        for (let j = i + 1; j < newArrForSort.length; j++) {
+          if (newArrForSort[j] > newArrForSort[maxElIndex]) maxElIndex = j
+
+          if (maxElIndex !== i) {
+            let temp = newArrForSort[i]
+            newArrForSort[i] = newArrForSort[maxElIndex]
+            newArrForSort[maxElIndex] = temp
+
+            let tempRow = arrForSort[i]
+            arrForSort[i] = arrForSort[maxElIndex]
+            arrForSort[maxElIndex] = tempRow
+          }
+
+        }
+
+      }
+      return arrForSort
+    }
+
+    let arrSortBySumWeekMinMax = getSortInWeek(arrCashShopsWeek)
+
+    let arrSortByMaxEl = getSortMaxToMin(arrCashShopsWeek, arrMaxEl)
+
+    let arrSortBySumRow = getSortMaxToMin(arrCashShopsWeek, arrSumElementWeek)
+
+    document.write(`
+    Сума прибутку по днях тижня: ${getSumProfitByDays(arrCashShopsWeek, numShops)}<br> 
+    
+    Масив що містить лише суми більші за 500: ${getArrMoreHundred(arrCashShopsWeek)} <br> 
+    
+    Масиви з відсортованими данними: <br>
+    
+    Тиждень за зростанням:<br>`)
+    outputArr(arrSortBySumWeekMinMax)
+    document.write(` За спаданням максимального елемента в тижні:<br>`)
+    outputArr(arrSortByMaxEl)
+    document.write(`За спаданням суми елементів у рядку:<br>`)
+    outputArr(arrSortBySumRow)
+
+
+
+
+  </script>
+</body>
+
+</html>

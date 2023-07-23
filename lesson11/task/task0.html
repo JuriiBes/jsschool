@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>
+        Знайти суми елементів у вказаній області (масиви розділені на 4 рівні частини)
+      </p>
+      <img src="../img/task.png" alt="img">
+      <p>Також знайти: суму парних рядків, суму непарних стовпців, в парних рядках – непарні стовпці, у
+        непарних – парні.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+
+  <script>
+    let arrTaskOne = [[1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5, 6], [4, 5, 6, 7]]
+
+    // function imgOne(arr) {
+    //   let sumElementImgOne = 0
+    //   let rowNum = Math.floor(arr.length / 2)
+    //   let columnNum = Math.floor(arr[0].length / 2)
+    //   for (let i = 0; i < rowNum; i++) {
+    //     for (let j = 0; j < columnNum; j++) {
+    //       sumElementImgOne += arr[i][j]
+    //     }
+    //   }
+    //   return sumElementImgOne
+    // }
+
+    // function imgTwo(arr) {
+    //   let sumElementImgTwo = 0
+    //   let rowNum = Math.floor(arr.length / 2)
+    //   let columnNum = Math.floor(arr[0].length / 2)
+    //   for (let i = 0; i < rowNum; i++) {
+    //     for (let j = columnNum; j < arr[0].length; j++) {
+    //       sumElementImgTwo += arr[i][j]
+    //     }
+    //   }
+    //   return sumElementImgTwo
+    // }
+    // function imgThree(arr) {
+    //   let sumElementImgThree = 0
+    //   let rowNum = Math.floor(arr.length / 2)
+    //   let columnNum = Math.floor(arr[0].length / 2)
+    //   for (let i = rowNum; i < arr.length; i++) {
+    //     for (let j = 0; j < columnNum; j++) {
+    //       sumElementImgThree += arr[i][j]
+    //     }
+    //   }
+    //   return sumElementImgThree
+    // }
+    // function imgFour(arr) {
+    //   let sumElementImgFour = 0
+    //   let rowNum = Math.floor(arr.length / 2)
+    //   let columnNum = Math.floor(arr[0].length / 2)
+    //   for (let i = rowNum; i < arr.length; i++) {
+    //     for (let j = columnNum; j < arr[0].length; j++) {
+    //       sumElementImgFour += arr[i][j]
+    //     }
+    //   }
+    //   return sumElementImgFour
+    // }
+
+    function sumElement(array, rowStart, rowEnd, columnStart, columnEnd) {
+      let sumEl = 0
+      for (let i = rowStart; i < rowEnd; i++) {
+        for (let j = columnStart; j < columnEnd; j++) {
+          sumEl += array[i][j]
+        }
+      }
+      return sumEl
+    }
+
+    // function sumCouplesRow(arr) {
+    //   let sumElement = 0
+    //   for (let i = 1; i < arr.length; i += 2) {
+    //     for (let j = 0; j < arr[i].length; j++) {
+    //       sumElement += arr[i][j]
+    //     }
+    //   }
+
+    //   return sumElement
+    // }
+
+    // function sumNotEvenColumn(arr) {
+    //   let sumElement = 0
+    //   for (let i = 0; i < arr.length; i++) {
+    //     for (let j = 0; j < arr[i].length; j += 2) {
+    //       sumElement += arr[i][j]
+    //     }
+    //   }
+    //   return sumElement
+    // }
+
+    // function sumNotEvenColumnCouplesRow(arr) {
+    //   let sumElement = 0
+    //   for (let i = 1; i < arr.length; i += 2) {
+    //     for (let j = 0; j < arr[i].length; j += 2) {
+    //       sumElement += arr[i][j]
+    //     }
+    //   }
+    //   return sumElement
+    // }
+
+    // function sumNotEvenRowCouplesColumn(arr) {
+    //   let sumElement = 0
+    //   for (let i = 0; i < arr.length; i += 2) {
+    //     for (let j = 1; j < arr[i].length; j += 2) {
+    //       sumElement += arr[i][j]
+    //     }
+    //   }
+    //   return sumElement
+    // }
+
+    function sumRowColumn(arr, rowStart, columnStart, rowIter, columnIter) {
+      let sumElement = 0
+      for (let i = rowStart; i < arr.length; i += rowIter) {
+        for (let j = columnStart; j < arr[i].length; j += columnIter) {
+          sumElement += arr[i][j]
+        }
+      }
+      return sumElement
+    }
+
+
+    document.write(`
+    Масив: <br>
+    ${arrTaskOne[0]}<br>
+    ${arrTaskOne[1]}<br>
+    ${arrTaskOne[2]}<br>
+    ${arrTaskOne[3]}<br>
+    Сума за малюнком 1: ${sumElement(arrTaskOne, 0, 2, 0, 2)}; <br>
+      Сума за малюнком 2: ${sumElement(arrTaskOne, 0, 2, 2, 4)}; <br>
+        Сума за малюнком 3: ${sumElement(arrTaskOne, 2, 4, 0, 2)}; <br>
+          Сума за малюнком 4: ${sumElement(arrTaskOne, 2, 4, 2, 4)}; <br>
+            Сума не парних стовпців: ${sumRowColumn(arrTaskOne, 1, 0, 2, 1)}; <br>
+              Сума парних рядків: ${sumRowColumn(arrTaskOne, 0, 0, 1, 2)}; <br>
+                Парні рядки - не парні стовпці: ${sumRowColumn(arrTaskOne, 1, 0, 2, 2)}; <br>
+                  Не парні рядки - парні стовпці: ${sumRowColumn(arrTaskOne, 0, 1, 2, 2)}; <br>
+`)
+  </script>
+</body>
+
+</html>
