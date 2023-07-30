@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 5</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 5</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>З використанням замикань розробити ітератор, тобто функцію, що буде поступово за окремими викликами
+        видавати по одну букву наперед заданого слова. З використанням нього розробити гру «Прекладач».
+        Виводимо для користувача опис цього слова і по одну букву користувач вводить переклад цього слова.
+        Підрахувати кількість вгаданих букв.</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+
+    function literatorLetter(word) {
+      let wordLetter, count = 0
+      function letterOutput() {
+        if (count === word.length) count = 0
+        wordLetter = word[count]
+        count++
+        return wordLetter
+      }
+      return letterOutput
+    }
+
+    let arrGuessedWord = [
+      ["flower", "Її можна зустріти скрізь. На дереві, в траві, на кущі. Та завжди вона красива."],
+      ["apple", "Воно впало на голову Ньютону."],
+      ["moon", "Вона крутиться навколо землі."],
+      ["water", "Вона займає понад 70% землі."],
+      ["wings", "RedBull надає..."],]
+
+
+    function questForUser(arr) {
+      let randNumWord = Math.floor(Math.random() * arr.length)
+      let trueAnswer = 0, falseAnswer = 0
+      let questWord = arr[randNumWord][0]
+      let letter = literatorLetter(questWord)
+      for (let i = 0; i < arr[randNumWord][0].length; i++) {
+        let questionForUser = prompt(`${arr[randNumWord][1]} \n Ваша літера:`)
+        if (questionForUser === letter()) ++trueAnswer
+        else ++falseAnswer
+      }
+
+      document.write(`
+        Загадка:"${arrGuessedWord[randNumWord][1]}"<br>
+        Відповідь: "${arrGuessedWord[randNumWord][0]}"<br>
+        Вірно вгаданих літер:${trueAnswer}<br>
+        Не вірних відповідей: ${falseAnswer}
+      `)
+    }
+
+    questForUser(arrGuessedWord)
+
+
+
+
+
+  </script>
+</body>
+
+</html>

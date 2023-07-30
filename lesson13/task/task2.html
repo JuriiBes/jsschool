@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 3</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 3</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>
+        Реалізувати бінарний пошук (розглядали на попередніх уроках) з використанням рекурсивного алгоритму.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+
+  <script>
+    let arrName = ["Don", "Ion", "Franklin", "Semen", "Olga", "Fred", "Sara", "Anna", "Dana"]
+
+    arrName.sort()
+
+
+    // Функція бінарного пошуку, 
+    function binarySearch(arr, searchEl, start, end) {
+
+      if (start > end) return -1
+      else {
+        let middle = Math.floor((start + end) / 2)
+        if (arr[middle] === searchEl) return middle
+        if (arr[middle] < searchEl) return binarySearch(arr, searchEl, middle + 1, end)
+        if (arr[middle] > searchEl) return binarySearch(arr, searchEl, start, middle - 1)
+      }
+    }
+
+    let findIndexSearchEl = binarySearch(arrName, "Semen", 0, arrName.length - 1)
+
+    if (findIndexSearchEl !== -1) {
+      document.write(`Ім'я ${arrName[findIndexSearchEl]} в упорядкованому масиві знаходиться під номером ${findIndexSearchEl}`)
+    }
+    else document.write(`Ім'я  відсутнє`)
+
+
+    document.write(`<br><br><br>${arrName}`)
+
+
+  </script>
+</body>
+
+</html>

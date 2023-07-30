@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Нехай <img src="../img/task2-1.png" alt="x">, де i=1,2.. . Визначити <img src="../img/task2-2.png" alt="x">.
+        Розв’язати з використанням рекурсивних і нерекурсивних алгоритмів.</p>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    // Рішення за допомогою рекурсивного алгоритму
+    // function solutionOfTheEquation(thatNumber) {
+    //   let result = 0
+    //   if (thatNumber === 0) return result = 1
+    //   else {
+    //     thatNumber--
+    //     return result = solutionOfTheEquation(thatNumber) + 2 * (thatNumber + 1)
+    //   }
+    // }
+
+
+    // Рішення за допомогою не рекурсивного алгоритму
+    // Як на мене елегантніше
+    function solutionOfTheEquation(thatNumber) {
+      let result = 1
+      for (let i = 1; i <= thatNumber; i++) {
+        result = result + 2 * i
+      }
+      return result
+    }
+
+    let userNum = parseInt(prompt('Please enter number:'))
+    document.write(solutionOfTheEquation(userNum))
+  </script>
+</body>
+
+</html>

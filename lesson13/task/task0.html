@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>
+        Реалізувати рекурсивну функцію знаходження степеня числа а.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+
+  <script>
+    function raisingNumberToPower(numToPower, valuePower) {
+      if (valuePower === 1) return numToPower
+      else {
+        valuePower--
+        return raisingNumberToPower(numToPower, valuePower) * numToPower
+      }
+    }
+
+    let userNumPower = parseInt(prompt('Please enter number for raising to a power:'))
+    let userPower = parseInt(prompt('Please enter the power to raise the number: '))
+
+    let result = raisingNumberToPower(userNumPower, userPower)
+
+    document.write(`${userNumPower} в степені ${userPower} рівне ${result}`)
+  </script>
+</body>
+
+</html>
