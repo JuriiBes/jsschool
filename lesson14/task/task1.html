@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>
+        Розробити функцію, у яку передають об’єкт (день, місяць, рік).
+        Визначити, який буде рік через N місяців.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    let objDate = {
+      day: 1,
+      month: 1,
+      year: 2023,
+    }
+    function determinationOfTheDate(obj, numMonth) {
+      let yearCount = objDate.year + Math.floor((objDate.month + numMonth) / 12)
+      return yearCount
+    }
+
+    let userNumMonth = parseInt(prompt('Введіть кількість місяців для підрахунку:'))
+
+    document.write(`Дата від якої йде лічба ${objDate.day}.${objDate.month}.${objDate.year}.<br>
+    Через ${userNumMonth} місяців, буде ${determinationOfTheDate(objDate, userNumMonth)} рік.`)
+
+
+  </script>
+</body>
+
+</html>

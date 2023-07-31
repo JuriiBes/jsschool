@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Описати масив об’єктів – сайтів розроблених компанією з такими
+        властивостями</p>
+      <p>----- Властивості ------</p>
+      <ul>
+        <li>назва компанії на час розробки (назву періодично змінюють)</li>
+        <li>власник компанії</li>
+        <li>спонсори (масив спонсорів)
+          <ul>
+            <li>прізвище спонсора</li>
+            <li>ім’я спонсора</li>
+            <li>сума вкладень спонсора</li>
+          </ul>
+        </li>
+        <li>рік випуску</li>
+        <li>вартість сайту</li>
+      </ul>
+
+      <p><br />Знайти:</p>
+      <ul>
+        <li>загальну вартість усіх сайтів</li>
+        <li>кількість сайтів, що було зроблено між 2000 та 2009 рр.</li>
+        <li>кількість сайтів, де сума спонсорських вкладень була більшою за
+          100000</li>
+        <li>створити загальний список усіх спонсорів (поки можуть повторюватись,
+          просто зібрати усі у масив)
+        </li>
+        <li>знайти рік, коли прибуток був найбільшим</li>
+        <li>упорядкувати список за спаданням прибутку</li>
+        <li>Створити 2 окремих списки з копіями об’єктів, що містять сайти з
+          вартість до 10000 і більше 10000
+        </li>
+      </ul>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    let arrPageCompany = [
+      webPage1 = {
+        title: 'maxCo',
+        companyOwner: 'Maximus',
+        sponsors: [
+          sponsor1 = {
+            name: 'Jo',
+            surname: 'Gardner',
+            investmentAmount: 1000,
+          },
+          sponsor1 = {
+            name: 'Fill',
+            surname: 'Smouth',
+            investmentAmount: 10001,
+          },
+        ],
+        graduationYear: 2012,
+        pricePage: 568,
+      },
+      webPage2 = {
+        title: 'pepCo',
+        companyOwner: 'Piter',
+        sponsors: [
+          sponsor1 = {
+            name: 'Jo',
+            surname: 'Gardner',
+            investmentAmount: 1000,
+          },
+          sponsor2 = {
+            name: 'Fill',
+            surname: 'Smouth',
+            investmentAmount: 1000,
+          },
+        ],
+        graduationYear: 2013,
+        pricePage: 555,
+      },
+      webPage3 = {
+        title: 'engineerCo',
+        companyOwner: 'John',
+        sponsors: [
+          sponsor1 = {
+            name: 'Jo',
+            surname: 'Gardner',
+            investmentAmount: 200,
+          },
+          sponsor2 = {
+            name: 'Fill',
+            surname: 'Smouth',
+            investmentAmount: 26500,
+          },
+        ],
+        graduationYear: 2023,
+        pricePage: 1250,
+      },
+      webPage4 = {
+        title: 'sadeCo',
+        companyOwner: 'Jurii',
+        sponsors: [
+          sponsor1 = {
+            name: 'Jo',
+            surname: 'Gardner',
+            investmentAmount: 9900,
+          },
+          sponsor2 = {
+            name: 'Fill',
+            surname: 'Smouth',
+            investmentAmount: 1000,
+          },
+          sponsor3 = {
+            name: 'Michael',
+            surname: 'Smith',
+            investmentAmount: 11000,
+          },
+        ],
+        graduationYear: 2022,
+        pricePage: 25500,
+      },
+    ]
+    // загальна вартість усіх сайтів
+    function getGeneralPrice(arrObj) {
+      // let generalPrice = 0
+      // for (let i = 0; i < arrObj.length; i++) {
+      //   generalPrice += arrObj[i].pricePage
+      // }
+      let generalPrice = arrObj.reduce((countPrice, objPage) => countPrice += objPage.pricePage, 0)
+      return generalPrice
+    }
+    // console.log(getGeneralPrice(arrPageCompany))
+
+    // кількість сайтів, що було зроблено між 2000 та 2009 рр.
+    function getProductionPeriod(arrObj) {
+      let valuePage = arrObj.reduce((countPage, objPage) => objPage.graduationYear >= 2000 && objPage.graduationYear <= 2009 ? countPage + 1 : countPage, 0)
+      return valuePage
+    }
+    // console.log(getProductionPeriod(arrPageCompany))
+
+    // кількість сайтів, де сума спонсорських вкладень була більшою за
+    // 100000
+    function getInvestmentPageMore(arrObj, sumInvestment) {
+      let investmentPage = arrObj.reduce((countPage, objPage) => {
+        let morSumInvestment = objPage.sponsors.some(element => element.investmentAmount > sumInvestment)
+        if (morSumInvestment === true) return countPage + 1
+        return countPage
+      }
+        , 0)
+      return investmentPage
+    }
+    // console.log(getInvestmentPageMore(arrPageCompany, 10000))
+
+    // створити загальний список усіх спонсорів 
+    function listSponsors(arrObj) {
+      let sponsorsList = []
+      arrObj.forEach(element => {
+        for (let i = 0; i < element.sponsors.length; i++) {
+          let tempName = element.sponsors[i].name
+          let nameSponsor = sponsorsList.includes(tempName)
+          if (nameSponsor !== true) sponsorsList.push(tempName)
+        }
+      });
+      return sponsorsList
+    }
+    // console.log(listSponsors(arrPageCompany))
+
+    // знайти рік, коли прибуток був найбільшим
+    function yearWithTheHighestProfit(arrObj) {
+      let yearMaxProfit
+      let profitMax = arrObj.reduce((maxProfit, element) => {
+        if (element.pricePage > maxProfit) {
+          yearMaxProfit = element.graduationYear
+          return maxProfit = element.pricePage
+        } return maxProfit
+      }
+        , 0)
+      return yearMaxProfit
+    }
+    // console.log(yearWithTheHighestProfit(arrPageCompany))
+
+    // упорядкувати список за спаданням прибутку
+    function listSortMaxToMin(arrObj) {
+      let arrToSort = JSON.parse(JSON.stringify(arrObj))
+
+      let arrProfit = []
+      for (let j = 0; j < arrToSort.length; j++) {
+        arrProfit.push(arrToSort[j].pricePage)
+      }
+
+      let temp
+      let tempObj
+
+      for (let i = 1; i < arrProfit.length; i++) {
+        for (let j = 0; j < arrProfit.length; j++) {
+          if (arrProfit[i] > arrProfit[j]) {
+            temp = arrProfit[j]
+            tempObj = arrToSort[j]
+            arrProfit[j] = arrProfit[i]
+            arrToSort[j] = arrToSort[i]
+            arrProfit[i] = temp
+            arrToSort[i] = tempObj
+          }
+        }
+      }
+      return arrToSort
+    }
+    console.log(listSortMaxToMin(arrPageCompany))
+
+
+    // Створити 2 окремих списки з копіями об’єктів, що містять сайти з
+    // вартість до 10000 і більше 10000
+    function sortLessOrMore(arrObj, numForSort) {
+      let arrLess = []
+      let arrMore = []
+      for (let i = 0; i < arrObj.length; i++) {
+        if (arrObj[i].pricePage < numForSort) arrLess.push(arrObj[i])
+        else arrMore.push(arrObj[i])
+      }
+      let arrSortLessOrMore = []
+      arrSortLessOrMore.push(arrLess)
+      arrSortLessOrMore.push(arrMore)
+      return arrSortLessOrMore
+    }
+    console.log(sortLessOrMore(arrPageCompany, 10000))
+
+
+    document.write(`
+    <ul>
+        <li>Загальна вартість усіх сайтів складає: ${getGeneralPrice(arrPageCompany)}.</li>
+        <li>Кількість сайтів, що було зроблено між 2000 та 2009 рр. складає: ${getProductionPeriod(arrPageCompany)}.</li>
+        <li>Кількість сайтів, де сума спонсорських вкладень була більшою за
+          100000 складає: ${getInvestmentPageMore(arrPageCompany, 10000)}.</li>
+        <li>Загальний список усіх спонсорів є: ${listSponsors(arrPageCompany)}.
+        </li>
+        <li>Рік, коли прибуток був найбільшим: ${yearWithTheHighestProfit(arrPageCompany)}.</li>
+        <li>Список за спаданням прибутку: відповідь виведено в консоль.</li>
+        <li>2 окремі списки з копіями об’єктів, що містять сайти з
+          вартість до 10000 і більше 10000: відповідь виведено в консоль}.
+        </li>
+      </ul>
+    `)
+  </script>
+</body>
+
+</html>
