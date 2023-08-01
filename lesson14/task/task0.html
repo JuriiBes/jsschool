@@ -224,8 +224,8 @@
       let arrLess = []
       let arrMore = []
       for (let i = 0; i < arrObj.length; i++) {
-        if (arrObj[i].pricePage < numForSort) arrLess.push(arrObj[i])
-        else arrMore.push(arrObj[i])
+        if (arrObj[i].pricePage < numForSort) arrLess.push(JSON.parse(JSON.stringify(arrObj[i])))
+        else arrMore.push(JSON.parse(JSON.stringify(arrObj[i])))
       }
       let arrSortLessOrMore = []
       arrSortLessOrMore.push(arrLess)
