@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 3</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 3</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити об’єкт «Авто». </p>
+      <table>
+        <tr>
+          <th>Поля (властивості)</th>
+          <th>Марка<br>
+            Розмір бака<br>
+            Кількість наявних літрів<br>
+            Кількість місць<br>
+            Кількість пасажирів
+          </th>
+        </tr>
+        <tr>
+          <th>Методи (дії)</th>
+          <th>Заправка на вказану кількість літрів<br>
+            Виведення кількості пасажирів<br>
+            Додавання пасажирів<br>
+            Висадка пасажирів
+          </th>
+        </tr>
+      </table>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    function Car(modelCar, volumeSteamTankCar, amountAvailableFuelCar, numberSeatsCar, numberPassengersCar) {
+      this.model = modelCar;
+      this.volumeSteamTank = volumeSteamTankCar;
+      this.amountAvailableFuel = amountAvailableFuelCar;
+      this.numberSeats = numberSeatsCar;
+      this.numberPassengers = numberPassengersCar;
+    }
+    Car.prototype.refuelingCar = function (numLitersRefueling) {
+      if (numLitersRefueling < this.volumeSteamTank - this.amountAvailableFuel) {
+        return this.amountAvailableFuel = this.amountAvailableFuel + numLitersRefueling
+      } else {
+        alert(`Максимальна кількість пального, якою можна заправити автомобіль складає: ${this.volumeSteamTank - this.amountAvailableFuel} літрів.`)
+      }
+    }
+
+    Car.prototype.outputNumPassengers = function () {
+      document.write(`В автомобілі знаходиться  ${this.numberPassengers} пасажирів.`)
+    }
+
+    Car.prototype.boardingPassengers = function (numPassengers) {
+      if (numPassengers <= this.numberSeats - this.numberPassengers) {
+        return this.numberPassengers = this.numberPassengers + numPassengers
+      } else {
+        alert(`В автомобілі знаходиться лише ${this.numberSeats - this.numberPassengers} вільних місця.`)
+      }
+    }
+
+    Car.prototype.disembarkationPassengers = function (numPassengers) {
+      if (numPassengers <= this.numberPassengers) {
+        return this.numberPassengers = this.numberPassengers - numPassengers
+      } else {
+        alert(`В автомобілі знаходиться лише ${this.numberPassengers} пасажирів.`)
+      }
+    }
+
+    let car1 = new Car('Honda Pilot', 65, 35, 7, 5)
+
+
+    let choiceUser = parseInt(prompt(`Зробіть свій вибір.\n1. Заправити автомобіль.\n2. Показати кількість пасажирів в автомобілі.\n3. Посадити пасажирів.\n4. Висадити пасажирів.`))
+
+    if (choiceUser < 1 && choiceUser > 4) { document.write('Error') }
+    else if (choiceUser === 1) {
+      let numUser = parseInt(prompt('Введіть кількість літрів для заправки.'))
+      let literTank = car1.refuelingCar(numUser)
+      document.write(`Після заправки в паливному баку знаходиться ${literTank} літрів пального.`)
+    }
+    else if (choiceUser === 2) {
+      car1.outputNumPassengers()
+    }
+    else if (choiceUser === 3) {
+      let numUser = parseInt(prompt('Введіть кількість пасажирів, яку ви хочете посадити до автомобіля.'))
+      let passOnBoard = car1.boardingPassengers(numUser)
+      document.write(`Після посадки ${numUser} пасажирів, загальна кількість пасажирів складає ${passOnBoard}.`)
+    }
+    else if (choiceUser === 4) {
+      let numUser = parseInt(prompt('Введіть кількість пасажирів, яку ви хочете висадити з автомобіля.'))
+      let passOffBoard = car1.disembarkationPassengers(numUser)
+      document.write(`Після висадки ${numUser} пасажирів, загальна кількість пасажирів складає ${passOffBoard}.`)
+    }
+
+
+
+  </script>
+</body>
+
+</html>

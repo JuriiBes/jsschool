@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку.
+      </p>
+
+      <table>
+        <tr>
+          <th>Поля (властивості)</th>
+          <th>Масив, у якому зберігається поле з зайцями</th>
+        </tr>
+        <tr>
+          <th>Методи (дії)</th>
+          <th>Метод пострілу (задається позиція пострілу)<br>
+            Виведення ігрового поля
+          </th>
+        </tr>
+      </table>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+
+    let shootingGallery = {
+      arrGoal: [],
+      funcSizeGallery: function (numGoal) {
+        for (let i = 0; i < numGoal; i++) {
+          this.arrGoal.push(0)
+        }
+      },
+      funcGoalRabbit: function (numRabbit) {
+        if (numRabbit < this.arrGoal.length && numRabbit !== undefined) {
+          for (let i = 0; i < numRabbit;) {
+            let goalRabbit = Math.floor(Math.random() * this.arrGoal.length)
+            if (this.arrGoal[goalRabbit - 1] !== 1) {
+              this.arrGoal[goalRabbit - 1] = 1
+              i++
+            }
+          }
+        } else alert('Кількість кроликів не може перевищувати кількості цілей та бути меншою за 1')
+      },
+      funcGameEngine: function (numShots) {
+        if (numShots < this.arrGoal.length && numShots !== undefined) {
+          let shotsUser = []
+          for (let i = 0; i < numShots; i++) {
+            let shotUser = parseInt(prompt(`У Вас є ${numShots - i} постріли. Ви стрілятимете в ціль під номером?`))
+            shotsUser.push(shotUser - 1)
+            if (this.arrGoal[shotUser - 1] === 1) alert('Ви знайшли кролика.')
+            else alert('Тут кролика не має.')
+          }
+          this.funcOutputGallery(shotsUser)
+        } else alert('Кількість пострілів не може перевищувати кількості цілей та бути меншою за 1')
+
+      },
+
+      funcOutputGallery: function (arrShots) {
+        document.write(`
+        <table>
+          <tr>
+          `)
+        for (let i = 0; i < this.arrGoal.length; i++) {
+          let goalShot = arrShots.some(element => element === i)
+          if (goalShot === true && this.arrGoal[i] === 1) {
+            document.write(`<th style="border: 2px solid green">Кролик</th>`)
+          } else if (goalShot === true && this.arrGoal[i] === 0) {
+            document.write(`<th style="border: 2px solid red"></th>`)
+          } else if (goalShot === false && this.arrGoal[i] === 0) {
+            document.write(`<th style="border: 2px solid black"></th>`)
+          } else if (goalShot === false && this.arrGoal[i] === 1) {
+            document.write(`<th style="border: 2px solid black">Кролик</th>`)
+          }
+
+        }
+        document.write(`</tr> </table>
+        <br><br><br><br>
+        <span style="font-size: 18px;">*Червоним кольором зазначені цілі, в які ви стріляли. Зеленим, якщо ваш постріл знайшов кролика</span>`)
+      },
+      funcRun: function (sizeGallery, numGoal, numShots) {
+        this.funcSizeGallery(sizeGallery)
+        this.funcGoalRabbit(numGoal)
+        this.funcGameEngine(numShots)
+      }
+    }
+
+    let sizeShotsGallery = parseInt(prompt('Введіть кількість цілей.'))
+    let numGoalRabbit = parseInt(prompt('Введіть кількість кроликів, що там ховаються.'))
+    let userNumShots = parseInt(prompt('Введіть кількість пострілів.'))
+    shootingGallery.funcRun(sizeShotsGallery, numGoalRabbit, userNumShots)
+
+  </script>
+</body>
+
+</html>

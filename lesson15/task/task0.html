@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано два об’єкта. Обидва містять масив цілих чисел. При цьому у одному з них є функція знаходження
+        суми, а у іншому – функція для знаходження добутку тих, які знаходяться між заданими мінімальним і
+        максимальних значенням.
+        Використати обидва методи стосовно обидвох об’єктів (використати call, apply)
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    let numPart1 = {
+      arrNum: [2, 5, 8, 9, 7, 8, 2, 4, 6, 4, 5, 4],
+      funcSum: function () {
+        return this.arrNum.reduce((countSum, element) => countSum += element, 0)
+      },
+    }
+
+    let numPart2 = {
+      arrNum: [10, 5, 6, 4, 8, 6, 8, 4, 8, 5, 2, 4],
+      funcProduct: function () {
+        return this.arrNum.reduce((countProd, element) => countProd = countProd * element, 1)
+      },
+    }
+
+    let sumPart1 = numPart1.funcSum()
+    let sumPart2 = numPart1.funcSum.call(numPart2)
+
+    let prodPart1 = numPart2.funcProduct.call(numPart1)
+    let prodPart2 = numPart2.funcProduct()
+
+
+    document.write(`
+    Сума масиву чисел першого об'єкта рівна: ${sumPart1}.<br>
+    Сума масиву чисел другого об'єкта рівна: ${sumPart2}.<br>
+    Добуток масиву чисел першого об'єкта рівна:${prodPart1}.<br>
+    Добуток масиву чисел другого об'єкта рівна: ${prodPart2}.<br>`)
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 4</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Розробити клас MultCheckerдля перевірки таблиці множення</p>
+      <table>
+        <tr>
+          <th>Поля(властивості)</th>
+          <th>Число, яке перевіряємо (наприклад, перевірка частини таблиці множення на 7)<br>
+            Кількість правильних відповідей<br>
+            Кількість неправильних відповідей
+          </th>
+        </tr>
+        <tr>
+          <th>Методи (дії)</th>
+          <th>Генерування прикладу (метод випадковим чином визначає друге число, перше число
+            фіксоване)<br>
+            Перевірка правильності вказаної відповіді<br>
+            render
+          </th>
+        </tr>
+      </table>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    class MultiChecker {
+      constructor(numUser) {
+        this.checkDigit = numUser,
+          this.correctAnswer = 0,
+          this.notCorrectAnswer = 0
+      }
+      getFormingAnExample() {
+        let numForming = Math.floor(Math.random() * 10)
+        let userAnswer = parseInt(prompt(`Перевіримо ваші знання таблички множення на ${this.checkDigit}\n
+          Скільки буде ${this.checkDigit} * ${numForming}`))
+        let arrResult = []
+        arrResult.push(numForming)
+        arrResult.push(userAnswer)
+        return arrResult
+      }
+      answerCheck(arrAnswer) {
+        let resultAnswer = this.checkDigit * arrAnswer[0]
+        if (resultAnswer === arrAnswer[1]) {
+          alert(`Відповідь вірна.`)
+          this.correctAnswer = this.correctAnswer + 1
+        }
+        else {
+          this.notCorrectAnswer = this.notCorrectAnswer + 1
+          alert(`Вірна відповідь: ${resultAnswer}.`)
+        }
+      }
+
+      run() {
+        let countExample = 0
+        let questionForUser
+        do {
+          countExample++
+          let answerArr = this.getFormingAnExample()
+          this.answerCheck(answerArr)
+          questionForUser = confirm('Наступний приклад?')
+        } while (questionForUser !== false)
+        document.write(`Ваші результати.<br> З ${countExample} прикладів, вірних відповідей: ${this.correctAnswer}, не вірних відповідей: ${this.notCorrectAnswer}.`)
+      }
+    }
+
+    let numForCheck = parseInt(prompt('На яке число табличку множення ви хочете перевірити?'))
+    let checkerNum = new MultiChecker(numForCheck)
+
+    checkerNum.run()
+  </script>
+</body>
+
+</html>

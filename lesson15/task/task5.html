@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 6</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 6</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Розробити клас «Керівник танців»</p>
+      <table>
+        <tr>
+          <th>Поля (властивості)</th>
+          <th>Масив імен хлопців<br>
+            Масив імен дівчат
+          </th>
+        </tr>
+        <tr>
+          <th>Методи (дії)</th>
+          <th>Метод випадкового вибору імені хлопця<br>
+            Метод випадкового вибору імені дівчини <br>
+            Метод виведення пари для танців<br>
+            Метод run , який ініціює через кожні 5 секунд виведення нової пари для танців
+          </th>
+        </tr>
+      </table>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+
+    class DanceDirector {
+      constructor(arrBoys, arrGirls) {
+        this.listBoys = arrBoys
+        this.listGirls = arrGirls
+      }
+
+      getRandNumGenerator(arr) {
+        return Math.floor(Math.random() * arr.length)
+      }
+
+      getSteamGenerator() {
+        let boys = JSON.parse(JSON.stringify(this.listBoys))
+        let girls = JSON.parse(JSON.stringify(this.listGirls))
+        let arrSteam = []
+        for (let i = boys.length; i > 0;) {
+          if (girls.length !== 0) {
+            let danceBoy = this.getRandNumGenerator(boys)
+            let danceGirl = this.getRandNumGenerator(girls)
+            arrSteam.push(`${boys[danceBoy]} - ${girls[danceGirl]}`)
+            boys.splice(danceBoy, 1)
+            girls.splice(danceGirl, 1)
+            i--
+          } else break
+        }
+        return arrSteam
+      }
+
+      outputTimer(arr) {
+        let i = 0
+        let myTimer = setInterval(() => {
+          if (i !== arr.length) {
+            document.write(`${arr[i]}<br>`)
+            i++
+          }
+          else clearInterval(myTimer)
+        }, 5000)
+      }
+
+      run() {
+        let steam = this.getSteamGenerator()
+        this.outputTimer(steam)
+      }
+
+    }
+
+    let arrListBoys = ['Igor', 'Pavel', 'Georg', 'Stas', 'Nikolai', 'Huan']
+    let arrListGirls = ['Svetlana', 'Anna', 'Dana', 'Lara', 'Genia']
+
+    let dance = new DanceDirector(arrListBoys, arrListGirls)
+    dance.run()
+  </script>
+</body>
+
+</html>
