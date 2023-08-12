@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити клас TMoney для роботи з грошовими сумами. Сума повинна зберігатися у вигляді доларового
+        еквіваленту. Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у
+        гривнях, та визначення курсу долара, при якому сума у гривнях збільшиться на 100. Курс долара
+        зберігати в окремому полі.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    class TMoney {
+      #sumMoney
+      #exchangeRate
+      constructor(investAmount, exRate) {
+        this.SumMoney = investAmount
+        this.ExchangeRate = exRate
+
+      }
+
+      get SumMoney() {
+        return this.#sumMoney
+      }
+
+      set SumMoney(sumChange) {
+        if (sumChange < 0) throw new Error('Помилка. Сума не може бути меншою за нуль')
+        this.#sumMoney = sumChange
+      }
+
+      get ExchangeRate() {
+        return this.#exchangeRate
+      }
+
+      set ExchangeRate(newExRate) {
+        if (newExRate <= 0) throw new Error('Помилка. Курс не може дорівнювати або бути меншим за нуль')
+        this.#exchangeRate = newExRate
+
+      }
+
+      getExRateMoreHundred() {
+        let res = (this.SumMoney * this.ExchangeRate + 100) / this.SumMoney
+        return res
+      }
+
+      getCashWithdrawal() {
+        let sunChange = parseInt(prompt('Виберіть суму яку хочете зняти:'))
+        if (sunChange / this.ExchangeRate <= this.SumMoney) {
+          this.SumMoney = this.SumMoney - sunChange / this.ExchangeRate
+        } else alert('Не достатньо коштів на рахунку')
+      }
+
+      getCashReplenishment() {
+        let sunChange = parseInt(prompt('Виберіть суму на яку хочете поповнити рахунок:'))
+        this.SumMoney = this.SumMoney + sunChange / this.ExchangeRate
+      }
+
+      run() {
+        let choiceOperation = parseInt(prompt('Виберіть операцію \n1. Зняття готівки.\n2. Поповнення готівки.'))
+        if (choiceOperation === 1) {
+          this.getCashWithdrawal()
+        } else if (choiceOperation === 2) {
+          this.getCashReplenishment()
+        } else throw new Error('Помилка.')
+      }
+
+      toString() {
+        return ` Стан рахунку: ${this.SumMoney.toFixed(2)} $.<br> Курс:${this.ExchangeRate}.<br> Курс при якому сума вкладень в грн збільшиться на 100 грн: ${this.getExRateMoreHundred()}<br><br>`
+      }
+    }
+
+    let sumInvest = parseInt(prompt('Виберіть суму вкладу в долларах:'))
+    let exRateInput = parseInt(prompt('Виберіть курс для розрахунків:'))
+    let res = new TMoney(sumInvest, exRateInput)
+    document.write(res)
+    res.run()
+    document.write(res)
+
+
+
+  </script>
+</body>
+
+</html>

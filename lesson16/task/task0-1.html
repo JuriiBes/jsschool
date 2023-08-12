@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити клас TDate для роботи із датами у форматі “день.місяць.рік”. Дата представляється структурою
+        із трьома полями. Реалізувати методи збільшення/зменшення дати на певну кількість днів, місяців чи
+        років. Введення та виведення дати реалізувати за допомогою методу toString.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+    class TDate {
+      // Масив з кількістю днів в кожному місяці. При вирішенні не враховані високосні роки 
+      #arrMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+      constructor(day, month, year) {
+        this.dayDate = day
+        this.monthDate = month
+        this.yearDate = year
+        this.monthsYear = 12
+
+      }
+
+      // Функція яка надає кількість днів до відповідного місяця
+      get numDaysMonth() {
+        if (this.yearDate % 4 === 0 && this.monthDate === 2) return 29
+        return this.#arrMonth[this.monthDate - 1]
+      }
+
+      // Функція розрахунку дня
+      changeDay(numChangeDays, answerUser) {
+        if (answerUser === 1) {
+          // increment 
+          if (numChangeDays <= this.numDaysMonth - this.dayDate) {
+            this.dayDate += numChangeDays
+          } else {
+            numChangeDays = numChangeDays - (this.numDaysMonth - this.dayDate)
+            this.changeMonth(1, answerUser)
+            while (numChangeDays >= this.numDaysMonth) {
+              numChangeDays -= this.numDaysMonth
+              this.changeMonth(1, answerUser)
+            }
+            this.dayDate = numChangeDays
+          }
+
+        } else if (answerUser === 2) {
+          // decrement
+          if (numChangeDays <= this.dayDate) {
+            this.dayDate -= numChangeDays
+            if (this.dayDate === 0) {
+              this.changeMonth(1, answerUser)
+              this.dayDate = this.numDaysMonth
+            }
+          } else {
+            numChangeDays = numChangeDays - this.dayDate
+            this.changeMonth(1, answerUser)
+            while (numChangeDays >= this.numDaysMonth) {
+              numChangeDays -= this.numDaysMonth
+              this.changeMonth(1, answerUser)
+            }
+            this.dayDate = this.numDaysMonth - numChangeDays
+          }
+        } else throw new Error('Не вірно визначена операція.')
+      }
+
+      // Функція розрахунку місяця
+      changeMonth(numChangeMonth, answerUser) {
+        if (answerUser === 1) {
+          // increment 
+          let yearIncludes = Math.floor((this.monthDate + numChangeMonth - 1) / this.monthsYear)
+          this.changeYear(yearIncludes, answerUser)
+          this.monthDate = (this.monthDate + numChangeMonth) % this.monthsYear
+          if (this.monthDate === 0) this.monthDate = this.monthsYear
+          if (this.monthDate > this.monthsYear) this.monthDate = 1
+
+        } else if (answerUser === 2) {
+          // decrement
+          let yearIncludes = Math.floor((this.monthDate - numChangeMonth) / this.monthsYear)
+          this.changeYear(yearIncludes, answerUser)
+          if (numChangeMonth < this.monthDate) {
+            this.monthDate -= numChangeMonth
+          } else {
+            this.monthDate = this.monthsYear - (this.monthDate - numChangeMonth) % this.monthsYear
+            if (this.monthDate === 12) {
+              this.changeYear(1, answerUser)
+            }
+          }
+        } else throw new Error('Не вірно визначена операція.')
+      }
+
+      // Функція розрахунку року
+      changeYear(numChangeYear, answerUser) {
+        if (answerUser === 1) {
+          // increment 
+          this.yearDate += numChangeYear
+        } else if (answerUser === 2) {
+          // decrement
+          this.yearDate -= numChangeYear
+          if (this.yearDate <= 0) this.yearDate -= 1
+        } else throw new Error('Не вірно визначена операція.')
+      }
+
+      //  Функція, яка проводить розрахунок дати при 
+      calculationNewDate(numChangeDays, numChangeMonth, numChangeYear, answerUser) {
+        this.changeYear(numChangeYear, answerUser)
+        this.changeMonth(numChangeMonth, answerUser)
+        this.changeDay(numChangeDays, answerUser)
+      }
+
+      toString() {
+        return `Day: ${this.dayDate}. Month: ${this.monthDate}. Year: ${this.yearDate}.`
+      }
+
+      run() {
+        let questions = parseInt(prompt('1. Визначення дати яка буде (додаємо дні до поточної дати).\n2. Визначення дати яка була (віднімаємо дні від поточної дати).'))
+        let userNumDays = parseInt(prompt('Введіть кількість днів для проведення розрахунку:'))
+        let userNumMonth = parseInt(prompt('Введіть кількість місяців для проведення розрахунку:'))
+        let userNumYear = parseInt(prompt('Введіть кількість років для проведення розрахунку:'))
+        this.calculationNewDate(userNumDays, userNumMonth, userNumYear, questions)
+      }
+    }
+
+    let inputDate = confirm('Введіть дату з якою хочете проводити підрахунки:')
+
+    if (inputDate !== false) {
+      let inputDay = parseInt(prompt('Введіть: День.'))
+      let inputMonth = parseInt(prompt('Введіть: Місяць.'))
+      let inputYear = parseInt(prompt('Введіть: Рік.'))
+      let runTime = new TDate(inputDay, inputMonth, inputYear)
+      document.write(runTime)
+      runTime.run()
+      document.write('<br>')
+      document.write(runTime)
+    }
+  </script>
+</body>
+
+</html>

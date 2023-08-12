@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити клас TDate для роботи із датами у форматі “день.місяць.рік”. Дата представляється структурою
+        із трьома полями. Реалізувати методи збільшення/зменшення дати на певну кількість днів, місяців чи
+        років. Введення та виведення дати реалізувати за допомогою методу toString.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+
+    // Рішення побудоване по схемі:
+    //  - Отримання Днів що додаємо/віднімаємо(ДДВ)
+    // - Знаходження кількості цілих років, на яку потрібно, зменшити/збільшити дату
+    // - Знаходження залишку днів. ДДВ%365
+    // - Відповідно від знайденого значення знаходимо до якого місяця належить дана кількість днів
+    // - Після чого знаходимо день місяця віднявши від залишку днів кількість днів року (знайдений місяць - 1)
+
+    class TDate {
+
+      constructor(day, month, year) {
+        this.dayDate = day
+        this.monthDate = month
+        this.yearDate = year
+        // Масив з кількістю днів в кожному місяці. При вирішенні не враховані високосні роки 
+        this.arrMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+      }
+      // Функція, яка вираховує місяць за кількістю днів 
+      changeMonth(numDay) {
+        let res = 0
+        switch (numDay !== true) {
+          case (numDay > 334): res = 12
+            break;
+          case (numDay > 304): res = 11
+            break;
+          case (numDay > 273): res = 10
+            break;
+          case (numDay > 243): res = 9
+            break;
+          case (numDay > 212): res = 8
+            break;
+          case (numDay > 181): res = 7
+            break;
+          case (numDay > 151): res = 6
+            break;
+          case (numDay > 120): res = 5
+            break;
+          case (numDay > 90): res = 4
+            break;
+          case (numDay > 59): res = 3
+            break;
+          case (numDay > 31): res = 2
+            break;
+          case (numDay > 0): res = 1
+            break;
+        }
+        return res
+      }
+
+      // Функція, яка вираховує день місяця
+      changeDay(numDay) {
+        let sumDays = 0
+        let monthForSum = this.monthDate - 1
+        for (let i = 0; i < monthForSum; i++) {
+          sumDays += this.arrMonth[i]
+        }
+        return numDay - sumDays
+      }
+      // Функція, яка вираховує загальну кількість днів до дати з якою проводимо розрахунки
+      numberDayToday() {
+        let sumDays = 0
+        let monthForSum = this.monthDate - 1
+        for (let i = 0; i < monthForSum; i++) {
+          sumDays += this.arrMonth[i]
+        }
+        return sumDays + this.dayDate
+      }
+
+      //  Функція, яка проводить розрахунок дати при додаванні днів
+      incrementDate(dayChange) {
+        let numDay = this.numberDayToday()
+
+        if (dayChange >= 365) {
+
+          this.yearDate = this.yearDate + Math.floor(dayChange / 365)
+          let remainingDays = (dayChange + numDay) % 365 //- this.leapYearIncrement(dayChange)
+          this.monthDate = this.changeMonth(remainingDays)
+          this.dayDate = this.changeDay(remainingDays)
+
+        } else if (dayChange >= 365 - numDay) {
+
+          this.yearDate = this.yearDate + 1
+          let remainingDays = dayChange - (365 - numDay) //- this.leapYearIncrement(dayChange)
+          this.monthDate = this.changeMonth(remainingDays)
+          this.dayDate = this.changeDay(remainingDays)
+
+        } else if (dayChange >= this.arrMonth[this.monthDate - 1] - this.dayDate) {
+          let remainingDays = dayChange + numDay
+          this.monthDate = this.changeMonth(remainingDays)
+          this.dayDate = this.changeDay(remainingDays)
+
+        } else if (dayChange < this.arrMonth[this.monthDate - 1] - this.dayDate) {
+
+          this.dayDate = this.dayDate + dayChange
+        }
+      }
+
+      // leapYearIncrement(dayChange) {
+      //   let countLeapYear = 0
+      //   if (this.yearDate % 4 === 0 && this.monthDate >= 2) countLeapYear = countLeapYear + 1
+
+      //   let differenceYear = dayChange / 365
+      //   let yearForChange = this.yearDate
+      //   for (let i = differenceYear; i > 0; i--) {
+      //     yearForChange++
+      //     if (yearForChange % 4 === 0) countLeapYear++
+      //   }
+      //   return countLeapYear
+      // }
+
+      //  Функція, яка проводить розрахунок дати при відніманні днів
+      decrementDate(dayChange) {
+
+        let numDay = this.numberDayToday()
+
+        if (dayChange > 365) {
+
+          this.yearDate = this.yearDate - Math.floor(dayChange / 365)
+
+          let remainingDays = numDay - dayChange % 365
+          this.monthDate = this.changeMonth(remainingDays)
+          this.dayDate = this.changeDay(remainingDays)
+
+        } else if (dayChange >= numDay) {
+
+          this.yearDate = this.yearDate - 1
+          let remainingDays = 365 - (dayChange - numDay)
+          this.monthDate = this.changeMonth(remainingDays)
+          this.dayDate = this.changeDay(remainingDays)
+
+        } else if (dayChange >= this.dayDate) {
+
+          let remainingDays = numDay - dayChange
+          this.monthDate = this.changeMonth(remainingDays)
+          this.dayDate = this.changeDay(remainingDays)
+
+        } else if (dayChange < this.dayDate) {
+
+          this.dayDate = this.dayDate - dayChange
+        }
+      }
+
+      toString() {
+        return `Day: ${this.dayDate}. Month: ${this.monthDate}. Year: ${this.yearDate}.`
+      }
+
+      run() {
+        let questions = parseInt(prompt('1. Визначення дати яка буде (додаємо дні до поточної дати).\n2. Визначення дати яка була (віднімаємо дні від поточної дати).'))
+        let userNumDays = parseInt(prompt('Введіть кількість днів для проведення розрахунку:'))
+        if (questions === 1) this.incrementDate(userNumDays)
+        else this.decrementDate(userNumDays)
+      }
+    }
+
+    let inputDate = confirm('Введіть дату з якою хочете проводити підрахунки в форматі:\nДень. Місяць. Рік.')
+
+    let inputDay = parseInt(prompt('Введіть: День.'))
+    let inputMonth = parseInt(prompt('Введіть: Місяць.'))
+    let inputYear = parseInt(prompt('Введіть: Рік.'))
+
+    let runTime = new TDate(inputDay, inputMonth, inputYear)
+    document.write(runTime)
+    document.write('<br>')
+    if (inputDate !== false) {
+      runTime.run()
+      document.write(runTime)
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 4</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання
+        кількості купюр кожного із номіналів від 5 до 200 гривень. Реалізувати методи знаходження
+        максимальної та мінімальної сум, які може видати банкомат, та метод зняття деякої суми.</p>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+
+    class CashMachine {
+      par = [25, 7, 2, 12, 7, 10]
+      // ---------------5--------------------------
+
+
+
+      minCash() {
+        if (this.par[5] !== 0) return 5
+        if (this.par[4] !== 0) return 10
+        if (this.par[3] !== 0) return 20
+        if (this.par[2] !== 0) return 50
+        if (this.par[1] !== 0) return 100
+        if (this.par[0] !== 0) return 200
+      }
+
+
+      maxCash() {
+        let maxSum = 0
+        let parSum = 200
+        for (let i = 0; i < this.par.length; i++) {
+          maxSum = maxSum + this.par[i] * parSum
+          let iter = parSum / 2
+          if (iter === 5) {
+            parSum = iter
+          } else if (iter % 10 === 0) {
+            parSum = iter
+          } else parSum = iter - iter % 10
+        }
+        return maxSum
+      }
+
+
+      issuingCash(requestCash) {
+        let result = []
+        let cashPar = 0
+        if (requestCash > this.maxCash()) { throw new Error('Еhe ATM does not have the required amount of cash.') }
+        else if (requestCash % 5 !== 0) { throw new Error('Еhe ATM does not have the required amount of cash.') }
+        else {
+          let parNum = 200
+          for (let i = 0; i < this.par.length; i++) {
+            let count = 0
+            while (requestCash >= parNum && count < this.par[i]) {
+              requestCash -= parNum
+              count++
+            }
+            result.push(count)
+            this.par[i] -= count
+            let iter = parNum / 2
+            if (iter === 5) {
+              parNum = iter
+            } else if (iter % 10 === 0) {
+              parNum = iter
+            } else parNum = iter - iter % 10
+          }
+        }
+        this.outputResult(result)
+      }
+
+      outputResult(arr) {
+        let parNum = 200
+        for (let i = 0; i < arr.length; i++) {
+          document.write(`Купюра ${parNum} : ${arr[i]} шт.`)
+          document.write(`<br>`)
+          let iter = parNum / 2
+          if (iter === 5) {
+            parNum = iter
+          } else if (iter % 10 === 0) {
+            parNum = iter
+          } else parNum = iter - iter % 10
+        }
+      }
+      run() {
+        let userSumCash = parseInt(prompt('Введіть суму яку бажаєте зняти.'))
+        document.write(`Мінімальна сума яку ви могли зняти до транзакції, була: ${this.minCash()} грн.<br><br> 
+        Максимальна сума яку ви могли зняти до транзакції, була: ${this.maxCash()} грн.<br><br>`)
+
+        document.write(`Ваша транзакція ${userSumCash} грн:<br>`)
+        this.issuingCash(userSumCash)
+        document.write(`<br><br>Мінімальна сума яку ви можете зняти після транзакції, є: ${this.minCash()} грн.<br><br> 
+        Максимальна сума яку ви можете зняти після транзакції, є: ${this.maxCash()} грн.<br><br>`)
+      }
+    }
+
+    let ATM = new CashMachine()
+
+    ATM.run()
+
+  </script>
+</body>
+
+</html>

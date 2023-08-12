@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 3</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 3</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити об’єкт “Фірма” (використати члени-класи). </p>
+      <table>
+        <tr>
+          <th>Поля (властивості)</th>
+          <th>назва фірми;<br>
+            дата заснування (рік, місяць);<br>
+            послуги (назва послуги, вартість, термін виконання);<br>
+            адреси філіалів (країна, місто, вулиця, номер будинку);
+          </th>
+        </tr>
+        <tr>
+          <th>Методи (дії)</th>
+          <th>визначення кількості років існування фірми;<br>
+            виведення всіх філіалів фірми у вказаному місті;<br>
+            виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін
+            часу
+          </th>
+        </tr>
+      </table>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+
+    class Company {
+      constructor(nameCompany, dateEstablish, services, addresses) {
+        this.nameCompany = nameCompany
+        this.dateEstablishmentCompany = dateEstablish
+        this.servicesCompany = services
+        this.addressBranchCompany = addresses
+      }
+
+
+      ageCompany() {
+        document.write(`Age company : ${new Date().getFullYear() - this.dateEstablishmentCompany.year} <tr>`)
+      }
+
+      branchCompany() {
+        let cityBranch = prompt('Філії присутні в наступних містах: Львів, Вінниця, Чернівці. Яку місто Вас цікавить?')
+        for (const element of this.addressBranchCompany) {
+          if (element.branchCity === cityBranch)
+            document.write(`Країна: ${element.branchCountry}<br>
+          Місто: ${element.branchCity}<br>
+          Вулиця: ${element.branchStreet}<br>
+          Будинок: ${element.branchNumHouse}<br><br>`)
+        }
+      }
+
+      filerPriceServices() {
+        let numCash = parseInt(prompt('Введіть верхню цінову межу послуги'))
+        let numTime = parseInt(prompt('Введіть верхню часову межу послуги'))
+        for (const element of this.servicesCompany) {
+          if (element.servicePrice <= numCash && element.serviceDeadline <= numTime)
+            document.write(`Послуга: ${element.serviceName}<br>
+          Вартість: ${element.servicePrice}<br>
+          Час виконання в годинах: ${element.serviceDeadline}<br><br>`)
+        }
+      }
+
+      run() {
+        let choiceUser = parseInt(prompt('Яка опція Вас цікавить\n1. Кількості років існування фірми.\n2. Філіали фірми у вказаному місті.\n3. Послуги, що можуть бути виконані за вказану суму грошей та вказаний термін'))
+        let comp = new Company
+        switch (choiceUser) {
+          case 1: this.ageCompany()
+            break;
+          case 2: this.branchCompany()
+            break;
+          case 3: this.filerPriceServices()
+            break;
+          default: throw new Error('Error')
+            break;
+        }
+
+      }
+    }
+
+    class DateOfEstablishment {
+      constructor(year, month) {
+        this.year = year
+        this.month = month
+      }
+    }
+
+    class Services {
+      constructor(nameServices, price, deadline) {
+        this.serviceName = nameServices
+        this.servicePrice = price
+        this.serviceDeadline = deadline
+      }
+    }
+
+    class BranchAddress {
+      constructor(country, city, street, numHouse) {
+        this.branchCountry = country
+        this.branchCity = city
+        this.branchStreet = street
+        this.branchNumHouse = numHouse
+      }
+    }
+
+
+    const dateCreated = new DateOfEstablishment(2000, 3)
+    const services = [
+      new Services('Прання', '150', '12'),
+      new Services('Чистка килимів', '350', '36'),
+      new Services('Випікання коржиків', '550', '24')
+    ]
+    const branches = [
+      new BranchAddress('Україна', 'Львів', 'Свободи', '11'),
+      new BranchAddress('Україна', 'Чернівці', 'Карбулицького', '2а'),
+      new BranchAddress('Україна', 'Вінниця', 'Келецька', '95')
+    ]
+
+    const washCompany = new Company('Чисто та смачно', dateCreated, services, branches)
+
+    washCompany.run()
+
+  </script>
+</body>
+
+</html>
