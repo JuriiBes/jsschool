@@ -25,9 +25,25 @@
   <script>
 
     class CashMachine {
-      //    200-100-50-20--10--5
-      par = [5, 7, 2, 1200, 7, 10]
-      // ---------------5--------------------------
+
+      constructor(five, then, twenty, fifty, hundred, twoHundred) {
+        this.five = five
+        this.then = then
+        this.twenty = twenty
+        this.fifty = fifty
+        this.hundred = hundred
+        this.twoHundred = twoHundred
+        this.par = []
+      }
+
+      createArrPar() {
+        if (this.twoHundred >= 0) this.par.push(this.twoHundred)
+        if (this.hundred >= 0) this.par.push(this.hundred)
+        if (this.fifty >= 0) this.par.push(this.fifty)
+        if (this.twenty >= 0) this.par.push(this.twenty)
+        if (this.then >= 0) this.par.push(this.then)
+        if (this.five >= 0) this.par.push(this.five)
+      }
 
       minCash() {
         if (this.par[5] !== 0) return 5
@@ -73,11 +89,11 @@
               count++
             }
             result.push(count)
-            this.par[i] -= count
             parNum = this.parChange(parNum)
           }
         }
-        this.outputResult(result)
+        if (requestCash === 0) { this.outputResult(result) }
+        else { document.write(' <br> <span style="color: yellow" >Нажаль, не буде виконана, по причині відсутності потрібних купюр.</span>') }
       }
 
       outputResult(arr) {
@@ -85,10 +101,12 @@
         for (let i = 0; i < arr.length; i++) {
           document.write(`Купюра ${parNum} : ${arr[i]} шт.`)
           document.write(`<br>`)
+          this.par[i] -= arr[i]
           parNum = this.parChange(parNum)
         }
       }
       run() {
+        this.createArrPar()
         let userSumCash = parseInt(prompt('Введіть суму яку бажаєте зняти.'))
         document.write(`Мінімальна сума яку ви могли зняти до транзакції, була: ${this.minCash()} грн.<br><br> 
         Максимальна сума яку ви могли зняти до транзакції, була: ${this.maxCash()} грн.<br><br>`)
@@ -100,7 +118,7 @@
       }
     }
 
-    let ATM = new CashMachine()
+    let ATM = new CashMachine(25, 10, 15, 25, 10, 10)
 
     ATM.run()
 
