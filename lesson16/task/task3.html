@@ -25,10 +25,9 @@
   <script>
 
     class CashMachine {
-      par = [25, 7, 2, 12, 7, 10]
+      //    200-100-50-20--10--5
+      par = [5, 7, 2, 1200, 7, 10]
       // ---------------5--------------------------
-
-
 
       minCash() {
         if (this.par[5] !== 0) return 5
@@ -39,18 +38,22 @@
         if (this.par[0] !== 0) return 200
       }
 
+      parChange(num) {
+        let iter = num / 2
+        if (iter === 5) {
+          num = iter
+        } else if (iter % 10 === 0) {
+          num = iter
+        } else num = iter - iter % 10
+        return num
+      }
 
       maxCash() {
         let maxSum = 0
         let parSum = 200
         for (let i = 0; i < this.par.length; i++) {
           maxSum = maxSum + this.par[i] * parSum
-          let iter = parSum / 2
-          if (iter === 5) {
-            parSum = iter
-          } else if (iter % 10 === 0) {
-            parSum = iter
-          } else parSum = iter - iter % 10
+          parSum = this.parChange(parSum)
         }
         return maxSum
       }
@@ -71,12 +74,7 @@
             }
             result.push(count)
             this.par[i] -= count
-            let iter = parNum / 2
-            if (iter === 5) {
-              parNum = iter
-            } else if (iter % 10 === 0) {
-              parNum = iter
-            } else parNum = iter - iter % 10
+            parNum = this.parChange(parNum)
           }
         }
         this.outputResult(result)
@@ -87,12 +85,7 @@
         for (let i = 0; i < arr.length; i++) {
           document.write(`Купюра ${parNum} : ${arr[i]} шт.`)
           document.write(`<br>`)
-          let iter = parNum / 2
-          if (iter === 5) {
-            parNum = iter
-          } else if (iter % 10 === 0) {
-            parNum = iter
-          } else parNum = iter - iter % 10
+          parNum = this.parChange(parNum)
         }
       }
       run() {
