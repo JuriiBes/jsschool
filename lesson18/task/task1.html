@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Зробити конвертер для двох валют (курси валют – константи у скрипті)
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <div class="cash">
+    <label class="cash__label">
+      Введіть суму для розрахунку:
+      <input type="number" class="cash__input" id="grn">
+    </label>
+    <div class="cash result">
+      <div>
+        <span class="result__text">Сума в доларах :</span>
+        <span class="result__output" id="dollar">0</span>
+      </div>
+      <div>
+        <span class="result__text">Сума в євро :</span>
+        <span class="result__output" id="euro">0</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    function converterUSD() {
+      const dollarValue = 38
+      const userSum = parseFloat(document.getElementById('grn').value)
+      let result = userSum / dollarValue
+
+      document.querySelector('#dollar').innerText = result.toFixed(2)
+
+    }
+
+    function converterEURO() {
+      const euroValue = 40
+      const userSum = parseFloat(document.getElementById('grn').value)
+      let result = userSum / euroValue
+
+      document.querySelector('#euro').innerText = result.toFixed(2)
+    }
+
+    function converter() {
+      converterUSD()
+      converterEURO()
+    }
+
+    document.getElementById('grn').oninput = converter
+
+
+
+  </script>
+</body>
+
+</html>

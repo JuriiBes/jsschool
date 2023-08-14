@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 4</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Наперед задано у скрипті масив зі списком бажань. Після завантаження сторінки випадковим чином
+        вибираються 3 і відображаються у окремих div (їх треба створити і додати на сторінку)</p>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+
+  <div class="desire__three"></div>
+
+  <script>
+    let desire = [
+      'Happy day',
+      'Smile',
+      'Love',
+      'Good day',
+      'Good night',
+      'Happy life',
+      'Happy'
+    ]
+
+    function randDesire(arr) {
+      return Math.floor(Math.random() * (arr.length - 1))
+    }
+
+    function outputDesire(arr) {
+      let parentElem = document.querySelector('.desire__three')
+      for (let i = 0; i < 3; i++) {
+        let newDiv = document.createElement('div')
+        newDiv.className = 'desireDiv'
+        newDiv.innerText = desire[randDesire(arr)]
+        parentElem.append(newDiv)
+      }
+    }
+    outputDesire(desire)
+  </script>
+</body>
+
+</html>

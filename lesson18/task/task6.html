@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 7</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 7</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Подорож складається з 3 етапів. На кожному етапі користувач може вибрати один з видів транспорту
+        (авто, автобус, літак - випадаючий список), харчування (сніданок, обід, вечеря – checkbоx) та одного
+        з 3-х гідів(використати - radio buttons). Ціни визначте самі. Підрахувати загальну вартість.</p>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <div class="travel">
+    <div class="travel__part">
+
+      <form action="" class="traver__form">
+
+        <h3>Part 1</h3>
+
+        <select name="transport" id="part1" class="travel__select">
+          <option selected value="1000">Car</option>
+          <option value="100">Bus</option>
+          <option value="90">Train</option>
+          <option value="2500">Plane</option>
+        </select>
+        <div class="travel__dinner">
+          <label for="break-part"><input type="checkbox" id="break-part" value="250">Breakfast</label>
+          <label for="dinner-part"><input type="checkbox" id="dinner-part" value="550">Dinner</label>
+          <label for="supper-part"><input type="checkbox" id="supper-part" value="500">Supper</label>
+        </div>
+        <div class="travel__gid">
+          <div><input type="radio" name="gid-part1" value="1000" id="gid01">
+            <label for="gid01">Arthur</label>
+          </div>
+          <div><input type="radio" name="gid-part1" value="1000" id="gid02">
+            <label for="gid02">Diana</label>
+          </div>
+          <div><input type="radio" name="gid-part1" value="1000" id="gid03">
+            <label for="gid03">Sem</label>
+          </div>
+        </div>
+      </form>
+
+      <form action="" class="traver__form">
+        <h3>Part 2</h3>
+        <select name="transport" id="part1" class="travel__select">
+          <option value="1000">Car</option>
+          <option value="100">Bus</option>
+          <option selected value="90">Train</option>
+          <option value="2500">Plane</option>
+        </select>
+        <div class="travel__dinner">
+          <label for="break-part"><input type="checkbox" id="break-part" value="250">Breakfast</label>
+          <label for="dinner-part"><input type="checkbox" id="dinner-part" value="550">Dinner</label>
+          <label for="supper-part"><input type="checkbox" id="supper-part" value="500">Supper</label>
+        </div>
+        <div class="travel__gid">
+          <div><input type="radio" name="gid-part2" value="1000" id="gid11">
+            <label for="gid11">Arthur</label>
+          </div>
+          <div><input type="radio" name="gid-part2" value="1000" id="gid12">
+            <label for="gid12">Diana</label>
+          </div>
+          <div><input type="radio" name="gid-part2" value="1000" id="gid13">
+            <label for="gid13">Sem</label>
+          </div>
+        </div>
+      </form>
+
+      <form action="" class="traver__form">
+        <h3>Part 3</h3>
+        <select name="transport" id="part1" class="travel__select">
+          <option value="1000">Car</option>
+          <option value="100">Bus</option>
+          <option value="90">Train</option>
+          <option selected value="2500">Plane</option>
+        </select>
+        <div class="travel__dinner">
+          <label for="break-part"><input type="checkbox" id="break-part" value="250">Breakfast</label>
+          <label for="dinner-part"><input type="checkbox" id="dinner-part" value="550">Dinner</label>
+          <label for="supper-part"><input type="checkbox" id="supper-part" value="500">Supper</label>
+        </div>
+        <div class="travel__gid">
+          <div><input type="radio" name="gid-part3" value="1000" id="gid21">
+            <label for="gid21">Arthur</label>
+          </div>
+          <div><input type="radio" name="gid-part3" value="1000" id="gid22">
+            <label for="gid22">Diana</label>
+          </div>
+          <div><input type="radio" name="gid-part3" value="1000" id="gid23">
+            <label for="gid23">Sem</label>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="travel__box-button">
+      <button type="button" id="count" class="travel__button">to count</button>
+    </div>
+    <div class="travel__result">
+      <span>Загальна сума подорожі складає: </span>
+      <span id="sum__travel">0</span>
+      <span>грн.</span>
+    </div>
+  </div>
+
+  <script>
+    function toCount() {
+      let arrSelect = document.querySelectorAll('.travel__select')
+      let sumSelect = 0
+      for (const element of arrSelect) {
+        sumSelect += parseInt(element.value)
+      }
+      let arrInput = document.querySelectorAll('input')
+      let sumInput = 0
+
+      for (const element of arrInput) {
+        if (element.checked) sumInput += parseInt(element.value)
+      }
+
+      let result = sumInput + sumSelect
+
+      document.getElementById('sum__travel').innerText = result
+    }
+
+    document.getElementById('count').onclick = function () {
+      toCount()
+    }
+  </script>
+</body>
+
+</html>

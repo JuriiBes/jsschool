@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Розробити калькулятор
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <div class="calculator">
+    <div class="buttons"></div>
+  </div>
+
+
+  <script>
+    // Create Inputs
+
+    let parentEl = document.querySelector('.calculator')
+
+    //  First input
+    let firstLabel = document.createElement('label')
+    firstLabel.innerText = "First number"
+    let firstInput = document.createElement('input')
+    firstInput.setAttribute('type', 'number')
+    firstInput.setAttribute('value', '0')
+    firstInput.setAttribute('id', 'first')
+    firstLabel.append(firstInput)
+
+    // Second input
+    let secondLabel = document.createElement('label')
+    secondLabel.innerText = "Second number"
+    let secondInput = document.createElement('input')
+    secondInput.setAttribute('type', 'number')
+    secondInput.setAttribute('value', '0')
+    secondInput.setAttribute('id', 'second')
+    secondLabel.append(secondInput)
+
+    // Add inputs to parent element
+    parentEl.prepend(secondLabel)
+    parentEl.prepend(firstLabel)
+
+
+    // Create buttons
+
+    // button add
+    let buttonAdd = document.createElement('button')
+    buttonAdd.setAttribute('id', 'add')
+    buttonAdd.innerText = "+"
+
+    // button subtraction
+    let buttonSubtraction = document.createElement('button')
+    buttonSubtraction.setAttribute('id', 'subtraction')
+    buttonSubtraction.innerText = "-"
+
+    // button multiplication
+    let buttonMultiplication = document.createElement('button')
+    buttonMultiplication.setAttribute('id', 'multiplication')
+    buttonMultiplication.innerText = "*"
+
+    // button division
+    let buttonDivision = document.createElement('button')
+    buttonDivision.setAttribute('id', 'division')
+    buttonDivision.innerText = "/"
+
+
+    // add buttons to parent element
+    let divButton = document.querySelector('.buttons')
+    divButton.append(buttonAdd)
+    divButton.append(buttonSubtraction)
+    divButton.append(buttonMultiplication)
+    divButton.append(buttonDivision)
+
+    // add to buttons attribute and class
+    let buttonsElement = document.querySelectorAll('button')
+    for (const element of buttonsElement) {
+      element.setAttribute('type', 'button')
+      element.className = "buttonCalculation"
+    }
+
+    // Create line result
+    let resultLine = document.createElement('div')
+    resultLine.className = "resultLine"
+    let resultText = document.createElement('span')
+    resultText.innerText = "Result:"
+    let answer = document.createElement('span')
+    answer.className = 'resultDecision'
+    answer.innerText = '0'
+    resultLine.append(resultText)
+    resultLine.append(answer)
+    parentEl.append(resultLine)
+
+
+    // Calculator
+    function searchDecision(elemId) {
+      let firstNum = parseFloat(document.getElementById('first').value)
+      let secondNum = parseFloat(document.getElementById('second').value)
+      let res = 0
+
+      switch (elemId) {
+        case ('add'):
+          res = firstNum + secondNum
+          break;
+        case ('subtraction'):
+          res = firstNum - secondNum
+          break;
+        case ('multiplication'):
+          res = firstNum * secondNum
+          break;
+        case ('division'):
+          res = firstNum / secondNum
+          break;
+      }
+      document.querySelector('.resultDecision').innerText = res.toFixed(2)
+    }
+
+
+    document.getElementById('add').onclick = function () {
+      searchDecision('add')
+    }
+    document.getElementById('subtraction').onclick = function () {
+      searchDecision('subtraction')
+    }
+    document.getElementById('multiplication').onclick = function () {
+      searchDecision('multiplication')
+    }
+    document.getElementById('division').onclick = function () {
+      searchDecision('division')
+    }
+  </script>
+</body>
+
+</html>

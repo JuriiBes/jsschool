@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 6</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 6</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Користувач задає кількість оцінок і натискає на кнопку «gettable». В результаті формується таблиця з
+        input, куди користувач вводить оцінки. Після цього натискає на кнопку “getsum” і знаходить середнє
+        значення.</p>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+
+
+  <div class="table-constructor">
+    <div class="input-table">
+      <label class="input-table__row">
+        Вкажіть кількість оцінок:
+        <input type="number" id="range">
+      </label>
+
+    </div>
+    <button type="button" class="button-table" id="tableNew">gettable</button>
+    <div class="range-table">
+
+    </div>
+    <button type="button" class="button-table" id="middle-button">getsum</button>
+    <div class="middle-range">
+      Середня оцінка: <span id="middle"></span>
+    </div>
+  </div>
+
+  <script>
+
+    function formRangeTable() {
+
+      let parentEl = document.querySelector('.range-table')
+      let numRangeUSer = parseInt(document.getElementById('range').value)
+      for (let i = 0; i < numRangeUSer; i++) {
+        let numRange = document.createElement('input')
+        numRange.setAttribute('type', 'number')
+        numRange.className = 'range-user'
+        parentEl.append(numRange)
+      }
+    }
+
+    function middleRange() {
+      let arrRange = document.querySelectorAll('.range-user')
+      let sumRange = 0
+      for (const element of arrRange) {
+        if (element.value > 0 && element.value < 13) {
+          sumRange += parseInt(element.value)
+        } else {
+          element.setAttribute('style', 'background-color:red')
+        }
+      }
+      let middleRange = sumRange / parseInt(document.getElementById('range').value)
+      document.getElementById('middle').innerText = middleRange.toFixed(0)
+    }
+
+    document.getElementById('tableNew').onclick = function () {
+      let arr = document.querySelectorAll('.range-user')
+      if (arr.length) {
+        for (const element of arr) {
+          element.remove()
+        }
+        formRangeTable()
+      } else {
+
+        formRangeTable()
+      }
+    }
+    document.getElementById('middle-button').onclick = function () {
+      middleRange()
+    }
+
+
+  </script>
+</body>
+
+</html>

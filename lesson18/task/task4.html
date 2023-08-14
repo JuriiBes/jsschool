@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 5</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 5</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Користувач задає кількість рядків і стовпців. Відобразити таблицю,у клітинках якої знаходяться числа
+        1, 2, 3, …</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+  <div class="table-constructor">
+    <div class="input-table">
+      <label class="input-table__row">
+        Вкажіть кількість рядків:
+        <input type="number" id="row">
+      </label>
+      <label class="input-table__column">
+        Вкажіть кількість стовпців:
+        <input type="number" id="column">
+      </label>
+    </div>
+    <button type="button" class="button-table" id="tableNew">Побудувати таблицю</button>
+    <table class="table">
+
+    </table>
+  </div>
+  <script>
+
+    function tableCreated() {
+      let rowNum = parseInt(document.getElementById('row').value)
+      let columnNum = parseInt(document.getElementById('column').value)
+
+      let parentTable = document.querySelector('.table')
+      let x = 1
+
+      for (let i = 0; i < rowNum; i++) {
+        let rowNew = document.createElement('tr')
+        parentTable.append(rowNew)
+        let parentColumn = parentTable.lastElementChild
+
+        for (let j = 0; j < columnNum; j++) {
+          let columnNew = document.createElement('td')
+          columnNew.innerText = x
+          parentColumn.append(columnNew)
+          x++
+        }
+      }
+    }
+
+    document.getElementById('tableNew').onclick = function () {
+      tableCreated()
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>
