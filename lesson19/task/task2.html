@@ -21,8 +21,50 @@
   </div>
   <h2>Результат рішення</h2>
 
-  <div class="age">
+  <div class="list__items">
 
+  </div>
+  <button type="button" class="list__button" id="colorBut"> Colored list</button>
+
+  <script>
+
+    function randNum(min, max) {
+      return min + Math.floor(Math.random() * (max - min + 1))
+    }
+
+    function createList(minLi, maxLi, minNum, maxNum) {
+      let parentEl = document.querySelector('.list__items')
+      let newList = document.createElement('ul')
+      newList.className = 'list__item'
+      let numLi = randNum(minLi, maxLi)
+      for (let i = 0; i < numLi; i++) {
+        let newLi = document.createElement('li')
+        newLi.innerText = randNum(minNum, maxNum)
+        newList.append(newLi)
+      }
+      parentEl.append(newList)
+    }
+
+    function colored() {
+      let arrList = document.querySelectorAll('.list__item')
+      for (const element of arrList) {
+        if (element.childElementCount % 2 === 0) element.style.backgroundColor = 'green'
+        else element.style.backgroundColor = 'rebeccapurple'
+      }
+    }
+
+    function createNumList(numList, minLi, maxLi, minNum, maxNum) {
+      for (let i = 0; i < numList; i++) {
+        createList(minLi, maxLi, minNum, maxNum)
+      }
+    }
+    createNumList(4, 1, 10, 1, 100)
+    document.getElementById('colorBut').onclick = function () {
+      colored()
+    }
+  </script>
 </body>
+
+
 
 </html>
