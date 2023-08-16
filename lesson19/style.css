@@ -75,7 +75,7 @@ h2 {
 }
 
 ul {
-  margin-left: 25px;
+  /* margin-left: 25px; */
 }
 
 .task__item {
@@ -171,12 +171,166 @@ td {
   }
 }
 
-
-
+/* Snow */
 .snow {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
+}
+
+/* helloo */
+
+.color-text {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.color-text:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+/* Input  number*/
+
+.input__num {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 300px;
+  padding: 25px;
+  border-radius: 20px;
+  border: 2px solid #192940;
+}
+
+.input__item {
+
+  font-size: 20px;
+  color: #97af0c;
+  background-color: #1b2b42;
+}
+
+/* List items */
+
+.list__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px;
+}
+
+.list__button {
+  cursor: pointer;
+  margin-top: 35px;
+  padding: 10px 50px;
+  border-radius: 15px;
+  border: 2px solid #e1de0c;
+  background-color: #97af0c;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.list__button:hover {
+  background-color: #303803;
+  color: #e1de0c;
+}
+
+.list__item {
+  padding: 10px 35px;
+  border-radius: 10px;
+}
+
+/* table__parent */
+.table__parent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px;
+}
+
+[class*=table__item] {
+  cursor: pointer;
+}
+
+/* Toogle */
+.items__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px;
+}
+
+.item__list {
+  position: relative;
+  width: 250px;
+  height: 200px;
+  border: 5px solid #e1de0c;
+}
+
+.item__list img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  overflow: hidden;
+  margin: 0;
+}
+
+.colorItem {
+  border: 5px solid #058a26;
+}
+
+
+
+/* Sportsmen */
+
+.list__box {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.list__item-sport {
+  padding: 25px 10px;
+  border-radius: 10px;
+  border: 2px solid #058a26;
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #b0e0dc;
+}
+
+.list__item-sport h3 {
+  text-align: center;
+}
+
+.list__sportsmen {
+  list-style: none;
+}
+
+.sportsmens {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.sportsmens__item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+  padding: 7px 10px;
+  border-radius: 5px;
+  border: 2px solid #97af0c;
+
+}
+
+.sportsmens__name {}
+
+.sportsmens__button {
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 17px;
+  border-radius: 5px;
+  background-color: #c45656;
 }
