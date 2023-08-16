@@ -19,9 +19,21 @@
     <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
   </div>
   <h2>Результат рішення</h2>
+  <div class="items__list">
+    <div class="item__list"><img src="../img/egs.webp" alt="pict"> </div>
+    <div class="item__list"><img src="../img/zombi.webp" alt="pict"></div>
+    <div class="item__list"><img src="../img/pirate.webp" alt="pict"></div>
+  </div>
 
   <script>
 
+    let arrItems = document.querySelectorAll('.item__list')
+
+    for (const element of arrItems) {
+      element.onclick = function () {
+        element.classList.toggle('colorItem')
+      }
+    }
   </script>
 </body>
 
