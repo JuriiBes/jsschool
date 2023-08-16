@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 6</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 6</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано список спортсменів. Потрібно сформувати список тих, які будуть брати участь у змаганні. При
+        цьому є два стовпці. В одному відображені всі спортсмени, в іншому – список тих, хто був вибраний.
+        При натисканні на зелену стрілку спортсмен переміщається у список для змагань. При натисканні на
+        червону стрілку спортсмен переміщається у загальний список.</p>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <div class="list__box">
+    <div class="list__item-sport">
+      <h3>Список спортсменів</h3>
+      <ul class="list__sportsmen sportsmens" id="listSport">
+        <li class="sportsmens__item">
+          <p class="sportsmens__name">Юрій Сила</p>
+          <button class="sportsmens__button">вибрати</button>
+        </li>
+        <li class="sportsmens__item">
+          <p class="sportsmens__name">Анна Краса</p>
+          <button class="sportsmens__button">вибрати</button>
+        </li>
+        <li class="sportsmens__item">
+          <p class="sportsmens__name">Дана Милість</p>
+          <button class="sportsmens__button">вибрати</button>
+        </li>
+        <li class="sportsmens__item">
+          <p class="sportsmens__name">Євгенія Любов</p>
+          <button class="sportsmens__button">вибрати</button>
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="list__item-sport">
+      <h3>Cпортсмени вибрані для змагань</h3>
+      <ul class="list__sportsmen sportsmens" id="choice">
+
+      </ul>
+    </div>
+  </div>
+
+  <script>
+
+    function choiceSportsmen(element, parent, button) {
+      let elementChoiceList = element.closest('.sportsmens__item')
+      element.innerText = button
+      let choiceSportsman = elementChoiceList.cloneNode(true)
+      let parentElementChoice = document.querySelector(parent)
+      parentElementChoice.append(choiceSportsman)
+      elementChoiceList.remove()
+    }
+
+    function changeList() {
+      let arrButton = document.querySelectorAll('.sportsmens__button')
+      for (const element of arrButton) {
+        element.onclick = function () {
+          let parentElement = element.closest('.sportsmens')
+          if (parentElement.getAttribute('id') === 'listSport') {
+            choiceSportsmen(element, '#choice', 'видалити')
+            changeList()
+          }
+          else {
+            choiceSportsmen(element, '#listSport', 'вибрати')
+            changeList()
+          }
+        }
+      }
+    }
+    changeList()
+  </script>
+</body>
+
+</html>

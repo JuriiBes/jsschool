@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 5</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 5</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      p>Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку (при
+      клікуробити toogleз класом вибраного елемента)</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+  <div class="items__list">
+    <div class="item__list"><img src="../img/egs.webp" alt="pict"> </div>
+    <div class="item__list"><img src="../img/zombi.webp" alt="pict"></div>
+    <div class="item__list"><img src="../img/pirate.webp" alt="pict"></div>
+  </div>
+
+  <script>
+
+    let arrItems = document.querySelectorAll('.item__list')
+
+    for (const element of arrItems) {
+      element.onclick = function () {
+        element.classList.toggle('colorItem')
+      }
+    }
+  </script>
+</body>
+
+</html>

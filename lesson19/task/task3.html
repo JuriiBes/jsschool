@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 4</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається клік на якійсь із клітинок,
+        то до відповідної таблиці додається червона рамка (спробуйте додати можливість відображення
+        кількості кліків біля назви таблиці з використанням відповідно доданого для цього атрибута).</p>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+  <div class="table__parent">
+
+  </div>
+
+
+
+  <script>
+    function randNum(min, max) {
+      return min + Math.floor(Math.random() * (max - min + 1))
+    }
+    function createTable(numRow, numColumn, minNum, maxNum) {
+      let parentEl = document.querySelector('.table__parent')
+
+      let tableEl = document.createElement('table')
+      tableEl.className = 'table__item'
+
+      // Create Header Table
+      let tableHeader = document.createElement('thead')
+      let newRow = document.createElement('tr')
+      let nameTable = document.createElement('th')
+      nameTable.innerText = 'Table Click = '
+      let countClick = document.createElement('span')
+      countClick.innerText = 0
+      nameTable.append(countClick)
+      newRow.append(nameTable)
+      tableHeader.append(newRow)
+      tableEl.append(tableHeader)
+
+
+      // Create Body Table
+      let tableBody = document.createElement('tb')
+
+      for (let i = 0; i < numRow; i++) {
+        newRow = document.createElement('tr')
+        for (let j = 0; j < numColumn; j++) {
+          let newColumn = document.createElement('th')
+          newColumn.innerText = randNum(minNum, maxNum)
+          newRow.append(newColumn)
+        }
+        tableBody.append(newRow)
+      }
+
+      tableEl.append(tableBody)
+      parentEl.append(tableEl)
+    }
+
+    function createNumTable(num, numRow, numColumn, minNum, maxNum) {
+      for (let i = 0; i < num; i++) {
+        createTable(numRow, numColumn, minNum, maxNum)
+      }
+
+    }
+
+    function countColor() {
+      this.style.border = '2px solid red'
+      let count = parseInt(this.querySelector('span').innerText)
+      ++count
+      this.querySelector('span').innerText = count
+
+    }
+    createNumTable(3, 3, 3, 1, 100)
+
+
+    let table = document.querySelectorAll('.table__item')
+    for (const element of table) {
+      element.onclick = function () {
+        element.style.border = '2px solid red'
+        let count = parseInt(element.querySelector('span').innerText)
+        ++count
+        element.querySelector('span').innerText = count
+      }
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>
