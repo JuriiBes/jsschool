@@ -23,13 +23,66 @@
   </div>
   <h2>Результат рішення</h2>
 
+  <div class="list__box">
+    <div class="list__item-sport">
+      <h3>Список спортсменів</h3>
+      <ul class="list__sportsmen sportsmens" id="listSport">
+        <li class="sportsmens__item">
+          <p class="sportsmens__name">Юрій Сила</p>
+          <button class="sportsmens__button">вибрати</button>
+        </li>
+        <li class="sportsmens__item">
+          <p class="sportsmens__name">Анна Краса</p>
+          <button class="sportsmens__button">вибрати</button>
+        </li>
+        <li class="sportsmens__item">
+          <p class="sportsmens__name">Дана Милість</p>
+          <button class="sportsmens__button">вибрати</button>
+        </li>
+        <li class="sportsmens__item">
+          <p class="sportsmens__name">Євгенія Любов</p>
+          <button class="sportsmens__button">вибрати</button>
+        </li>
+      </ul>
+    </div>
 
 
+    <div class="list__item-sport">
+      <h3>Cпортсмени вибрані для змагань</h3>
+      <ul class="list__sportsmen sportsmens" id="choice">
+
+      </ul>
+    </div>
+  </div>
 
   <script>
 
+    function choiceSportsmen(element, parent, button) {
+      let elementChoiceList = element.closest('.sportsmens__item')
+      element.innerText = button
+      let choiceSportsman = elementChoiceList.cloneNode(true)
+      let parentElementChoice = document.querySelector(parent)
+      parentElementChoice.append(choiceSportsman)
+      elementChoiceList.remove()
+    }
 
-
+    function changeList() {
+      let arrButton = document.querySelectorAll('.sportsmens__button')
+      for (const element of arrButton) {
+        element.onclick = function () {
+          let parentElement = element.closest('.sportsmens')
+          if (parentElement.getAttribute('id') === 'listSport') {
+            choiceSportsmen(element, '#choice', 'видалити')
+            changeList()
+          }
+          else {
+            choiceSportsmen(element, '#listSport', 'вибрати')
+            changeList()
+          }
+        }
+      }
+    }
+    changeList()
   </script>
 </body>
 
