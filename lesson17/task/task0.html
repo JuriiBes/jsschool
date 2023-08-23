@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити клас, що дозволяє виконувати такі операції над масивами: знаходження кількості додатних,
+        кількості від’ємних, кількість входжень деякого числа (статичні методи)
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+
+    class ArrayOperation {
+      constructor(arr, numSearch) {
+        this.arrayNum = arr
+        this.numSearch = numSearch
+        this.arrResult = []
+      }
+
+      positiveExceptions() {
+        let numPositive = 0
+        let numExceptions = 0
+        for (const element of this.arrayNum) {
+          if (element > 0) numPositive++
+          if (element < 0) numExceptions++
+        }
+        this.arrResult.push(numPositive)
+        this.arrResult.push(numExceptions)
+      }
+
+      searchNum() {
+        let num = this.arrayNum.reduce((result, element) => element === this.numSearch ? result = result + 1 : result, 0)
+        this.arrResult.push(num)
+      }
+      run() {
+        this.positiveExceptions()
+        this.searchNum()
+      }
+      toString() {
+        return `В поданому масиві ${this.arrResult[0]} значень більше за "0", та ${this.arrResult[1]} менших за "0".<br>Кількість входжень числа ${this.numSearch} рівна: ${this.arrResult[2]} рази.`
+      }
+    }
+
+    let arrNumbers = [5, 12, 354, 898, -45, -5, 87, 5, 5, -25, 48, 0, 45]
+
+    let arrOperation = new ArrayOperation(arrNumbers, 5)
+    arrOperation.run()
+    document.write(arrOperation)
+
+
+  </script>
+</body>
+
+</html>

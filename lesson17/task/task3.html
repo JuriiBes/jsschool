@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 4</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження,
+        короткий опис), назва книги, жанр, видавництво (назва, реєстраційний номер, рік заснування)).
+        Реалізувати розділи бібліотеки організувати додавання/вилучення книг та вибір книг за назвою, за ПІБ
+        автора, за видавництвом</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+
+  <div class="library-one">
+    <h2>Library</h2>
+    <ul class="library__items">
+
+    </ul>
+
+  </div>
+
+
+  <div class="book">
+
+    <div class="book__add">
+      <h3>Додати книгу</h3>
+      <label for="author-book" class="book__label">Автор:
+        <input type="text" id="author-book" class="book__input">
+      </label>
+      <label for="birthday " class="book__label"> Рік народження:
+        <input type="number" id="birthday" class="book__input">
+      </label>
+
+      <label for="name-book" class="book__label"> Назва книги:
+        <input type="text" id="name-book" class="book__input">
+      </label>
+      <label for="genre" class="book__label">Жанр:
+        <input type="text" id="genre" class="book__input">
+      </label>
+
+      <label for="description" class="book__label text-area">Опис:
+        <textarea id="description" class="book__area"></textarea>
+      </label>
+    </div>
+
+    <div class="publish">
+      <h3>Видавництво:</h3>
+      <label for="publisher" class="publish__label">Hазва:
+        <input type="text" id="publisher" class="publish__input">
+      </label>
+      <label for="publisherNum" class="publish__label">Реєстраційний номер:
+        <input type="text" id="publisherNum" class="publish__input">
+      </label>
+      <label for="publisherYear" class="publish__label">Рік заснування:
+        <input type="number" id="publisherYear" class="publish__input">
+      </label>
+    </div>
+
+  </div>
+
+  <div class="button-box">
+    <button type="button" class="book__button">Додати</button>
+  </div>
+
+  <div class="search">
+    <h2>Search</h2>
+    <label for="searchBook" class="search__label">
+      <input type="text" id="searchBook" class="search__input">
+      <button type="button" class="search__button">Знайти</button>
+    </label>
+    <ul class="search__items">
+
+    </ul>
+
+  </div>
+
+
+
+  <script>
+
+    class MyLibrary {
+      constructor() {
+        this.library = []
+      }
+      // Додавання книги до бібліотеки
+      addBookToLibrary() {
+        let publisher = document.querySelector('#publisher').value
+        let publisherNum = document.querySelector('#publisherNum').value
+        let publisherYear = document.querySelector('#publisherYear').value
+
+        let publisherHouse = new PublisherHouse(publisher, publisherNum, publisherYear)
+
+        let authorBook = document.querySelector('#author-book').value
+        let authorYear = document.querySelector('#birthday').value
+        let nameBook = document.querySelector('#name-book').value
+        let genreBook = document.querySelector('#genre').value
+        let areaBook = document.querySelector('#description').value
+
+        let addBook = new CreateBook(authorBook, authorYear, nameBook, genreBook, areaBook, publisherHouse)
+        this.createListItem(nameBook, authorBook)
+        publisher = document.querySelector('#publisher').value = ''
+        publisherNum = document.querySelector('#publisherNum').value = ''
+        publisherYear = document.querySelector('#publisherYear').value = ''
+        this.authorBook = document.querySelector('#author-book').value = ''
+        authorYear = document.querySelector('#birthday').value = ''
+        this.nameBook = document.querySelector('#name-book').value = ''
+        genreBook = document.querySelector('#genre').value = ''
+        areaBook = document.querySelector('#description').value = ''
+
+        this.library.push(addBook)
+      }
+
+      // Створення одиниці списку книжок
+      createListItem(bookName, bookAuthor) {
+        let parentElement = document.querySelector('.library__items')
+
+        let newItemBook = document.createElement('li')
+        newItemBook.className = 'library__item book-info'
+
+
+        let newSpanNameBook = document.createElement('span')
+        newSpanNameBook.className = 'book-info__name'
+        newSpanNameBook.innerText = bookName
+        newItemBook.append(newSpanNameBook)
+
+        let newSpanNameAuthor = document.createElement('span')
+        newSpanNameAuthor.className = 'book-info__author'
+        newSpanNameAuthor.innerText = bookAuthor
+        newItemBook.append(newSpanNameAuthor)
+
+        let newButton = document.createElement('button')
+        newButton.setAttribute('type', 'button')
+        newButton.className = 'book-info__button'
+        newButton.innerText = 'Видалити книгу'
+        newItemBook.append(newButton)
+
+        parentElement.append(newItemBook)
+      }
+
+      // Пошук книжки
+      searchBook() {
+        let valueSearch = document.querySelector('#searchBook').value
+        let parentEl = document.querySelector('.search__items')
+        parentEl.innerText = ''
+        let numElement = Infinity
+        this.library.forEach((element, index) => {
+          for (const key in element) {
+
+            if (element[key] === valueSearch) {
+              numElement = index
+              if (numElement !== Infinity) {
+                let searchBookInfo = document.createElement('div')
+                searchBookInfo.innerText = this.outputSearch(numElement)
+                parentEl.append(searchBookInfo)
+                numElement = Infinity
+              }
+            }
+          }
+        });
+      }
+      // Вивід інформації про результати пошуку
+      outputSearch(iter) {
+        return `Назва:${this.library[iter].nameBook}. Жанр: ${this.library[iter].genre}.
+                Автор: ${this.library[iter].author}.
+                Дата народження автора: ${this.library[iter].birthdayAuthor}.
+                Опис: ${this.library[iter].description}
+                Видавець: ${this.library[iter].publisher.houseName}
+                Ліцензія: ${this.library[iter].publisher.numLicense}. Дата заснування: ${this.library[iter].publisher.dateEstablishment}.`
+      }
+      // Видалення книги з бібліотеки
+      removeBook(nameBookToRemove) {
+        let boorRemoveArr = this.library.reduce((searchEl, element, index) => element.nameBook === nameBookToRemove ? searchEl = index : searchEl, 0)
+        this.library.splice(boorRemoveArr, 1)
+      }
+    }
+
+    // Класи для формування об'єкту книги
+    class CreateBook {
+      constructor(name, birthday, nameBook, genre, description, publisher) {
+        this.author = name
+        this.birthdayAuthor = birthday
+        this.nameBook = nameBook
+        this.genre = genre
+        this.description = description
+        this.publisher = publisher
+
+      }
+    }
+
+    class PublisherHouse {
+      constructor(houseName, numLicense, dateEstablishment) {
+        this.houseName = houseName
+        this.numLicense = numLicense
+        this.dateEstablishment = dateEstablishment
+      }
+    }
+
+
+    let newLibrary = new MyLibrary
+
+    let createButton = document.querySelector('.book__button')
+    createButton.onclick = function () {
+      newLibrary.addBookToLibrary()
+    }
+
+    let removeButton = document.querySelector('.library-one')
+    removeButton.onclick = function (e) {
+      if (e.target.tagName === 'BUTTON') {
+        let elementRemove = e.target.closest('.library__item')
+        let removeNameBook = elementRemove.firstChild.innerText
+        newLibrary.removeBook(removeNameBook)
+        elementRemove.remove()
+      }
+    }
+    let buttonSearch = document.querySelector('.search__button')
+    buttonSearch.onclick = function () {
+      newLibrary.searchBook()
+    }
+
+
+
+  </script>
+</body>
+
+</html>

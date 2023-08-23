@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити службове авто (водій, марка, номер). Створити клас таким чином, щоб можна було створити
+        тільки один екземпляр цього класу.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+
+
+
+
+
+  <script>
+
+    class CompanyCar {
+      static #carCompany
+      constructor(driverMan, brand, plateLicense) {
+        if (CompanyCar.#carCompany) return CompanyCar.#carCompany
+        this.driver = driverMan
+        this.carBrand = brand
+        this.licensePlate = plateLicense
+
+        CompanyCar.#carCompany = this
+
+      }
+
+      toString() {
+        return `Driver: ${this.driver}. Car: ${this.carBrand}. Licensed plate: ${this.licensePlate}.`
+      }
+
+    }
+
+
+    let car = new CompanyCar('Arthur', 'AUDI', 'AR 526-05 D')
+    let twoCar = new CompanyCar('Beata', 'Bugs', 'BRBRBR')
+    document.write(car)
+    document.write(`<br>`)
+    document.write(twoCar)
+
+  </script>
+</body>
+
+</html>

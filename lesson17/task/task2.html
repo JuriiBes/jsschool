@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 3</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 3</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити клас Нагадувач. Кожні вказані кількості секунд (використати setInterval) програма нагадує
+        про якусь подію (це просто текст) і також виводиться порядковий номер скільки раз вже нагадування
+        було. Зробити так, щоб неможна було зробити одночасно декілька об’єктів-нагадувачів. Методи зупинки
+        таймера, метод зміни повідомлення без зупинки таймера.</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <div class="answer--task"></div>
+
+  <script>
+
+
+    class CreateMessage {
+      constructor(count, message) {
+        this.count = count
+        this.message = message
+      }
+
+      bodyMassage() {
+        let parentEl = document.querySelector('.answer--task')
+        let newDiv = document.createElement('div')
+        newDiv.innerText = this.count + ' ' + this.message
+
+        parentEl.append(newDiv)
+      }
+    }
+
+    class Reminder {
+      constructor(messageOne, timeInterval, messageTwo, numChange) {
+        this.messageOne = messageOne
+        this.timeInterval = timeInterval
+        this.messageTwo = messageTwo
+        this.numReminderToChangeMessage = numChange
+      }
+
+      outputReminder() {
+        let count = 1
+        let massage
+        let interval = setInterval(() => {
+          if (count <= this.numReminderToChangeMessage) {
+            massage = new CreateMessage(count, this.messageOne)
+            massage.bodyMassage()
+            count++
+          } else {
+            massage = new CreateMessage(count, this.messageTwo)
+            massage.bodyMassage()
+            count++
+            if (count === 10) {
+              clearInterval(interval)
+            }
+          }
+        }, this.timeInterval)
+      }
+    }
+
+
+    let newReminder = new Reminder('Підпишіться!!!', 3000, 'Не втратьте можливість підписатись!', 3)
+    newReminder.outputReminder()
+
+  </script>
+</body>
+
+</html>
