@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Створити клас, що дозволяє виконувати такі операції над масивами: знаходження кількості додатних,
+        кількості від’ємних, кількість входжень деякого числа (статичні методи)
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <script>
+
+    class ArrayOperation {
+      static arrayNum
+      static arrResult = []
+      static numSearch
+
+
+      static positiveExceptions() {
+        let numPositive = 0
+        let numExceptions = 0
+        for (const element of ArrayOperation.arrayNum) {
+          if (element > 0) numPositive++
+          if (element < 0) numExceptions++
+        }
+        ArrayOperation.arrResult.push(numPositive)
+        ArrayOperation.arrResult.push(numExceptions)
+      }
+
+      static searchNum() {
+        let num = ArrayOperation.arrayNum.reduce((result, element) => element === this.numSearch ? result = result + 1 : result, 0)
+        ArrayOperation.arrResult.push(num)
+      }
+      run() {
+        ArrayOperation.positiveExceptions()
+        ArrayOperation.searchNum()
+      }
+      toString() {
+        return `В поданому масиві ${ArrayOperation.arrResult[0]} значень більше за "0", та ${ArrayOperation.arrResult[1]} менших за "0".<br>Кількість входжень числа ${ArrayOperation.numSearch} рівна: ${ArrayOperation.arrResult[2]} рази.`
+      }
+    }
+
+    let arrNumbers = [5, 12, 354, 898, -45, -5, 87, 5, 5, -25, 48, 0, 45]
+    ArrayOperation.arrayNum = arrNumbers
+    ArrayOperation.numSearch = 5
+    let arrOperation = new ArrayOperation()
+
+    arrOperation.run()
+    document.write(arrOperation)
+
+
+  </script>
+</body>
+
+</html>
