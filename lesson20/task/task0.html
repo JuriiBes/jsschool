@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="stars">
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Сяючі зорі. Вказана кількість зірочок повинна з’являтися у випадковій частині екрану. Кожна зірка (це
+        екземпляр класу Star) з певним кроком і інтервалом збільшується від мінімального до максимального
+        розміру. Як тільки досягнути максимального розміру зірочка повинна з’являтися у іншій випадковій
+        позиції.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <div class="star"></div>
+  <script>
+
+    class StarLight {
+      constructor(numStar) {
+        this.numStar = numStar
+      }
+      randNum(min, max) {
+        return min + Math.floor(Math.random() * (max - min + 1))
+      }
+      bodyStar() {
+        let parentEl = document.querySelector('.star')
+
+
+        let starItem = document.createElement('img')
+        starItem.setAttribute('src', '../img/star.png')
+        starItem.style.position = 'absolute'
+        let topPos = this.randNum(80, innerHeight - 80)
+        starItem.style.top = topPos + 'px'
+        let leftPos = this.randNum(80, innerWidth - 80)
+        starItem.style.left = leftPos + 'px'
+
+        let starWidth = 5
+        starItem.style.width = starWidth + 'px'
+        starItem.style.transition = '0.1s'
+        parentEl.append(starItem)
+
+        let widthMore = setInterval(() => {
+          if (starWidth < 80) {
+            starWidth += 1
+            starItem.style.width = starWidth + 'px'
+            topPos -= 0.5
+            starItem.style.top = topPos + 'px'
+            leftPos -= 0.5
+            starItem.style.left = leftPos + 'px'
+
+          } else clearInterval(widthMore)
+        }, 20);
+
+        let widthLess = setInterval(() => {
+          if (starWidth !== 0) {
+            starWidth -= 1
+            starItem.style.width = starWidth + 'px'
+            topPos += 0.5
+            starItem.style.top = topPos + 'px'
+            leftPos += 0.5
+            starItem.style.left = leftPos + 'px'
+          } else {
+            clearInterval(widthLess)
+            starItem.remove()
+          }
+        }, 30);
+
+      }
+
+      run() {
+        for (let i = 0; i < this.numStar; i++) {
+          this.bodyStar()
+        }
+        setTimeout(() => {
+          setInterval(() => {
+            this.bodyStar()
+          }, 1000);
+        }, 3000);
+      }
+    }
+
+    let star = new StarLight(5)
+    star.run()
+
+  </script>
+</body>
+
+</html>

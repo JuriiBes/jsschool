@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Байрактар. З верхньої частини екрану у випадковій позиції по горизонталі з’являються танки, якіїдуть
+        вниз. При кліку на танк вінвибухає і зникає з екрану.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <div class="tanks"></div>
+
+  <script>
+
+    class Bayraktar {
+      randNum(min, max) {
+        return min + Math.floor(Math.random() * (max - min + 1))
+      }
+      render(positionTank) {
+        let parentEl = document.querySelector('.tanks')
+
+        let tanksBox = document.createElement('div')
+        tanksBox.setAttribute('id', 'targetTank')
+        tanksBox.style.width = 80 + 'px'
+        tanksBox.style.height = 100 + 'px'
+        tanksBox.style.position = 'absolute'
+        let topPosition = 0
+        tanksBox.style.top = topPosition + 'px'
+        tanksBox.style.left = positionTank + 'px'
+        tanksBox.style.overflow = 'hidden'
+
+
+
+
+        this.tankImg = document.createElement('img')
+        this.tankImg.setAttribute('src', '../img/task2/tank.png')
+        this.tankImg.style.top = 0
+        this.tankImg.style.left = 0
+        this.tankImg.style.width = 100 + '%'
+        this.tankImg.style.height = 80 + '%'
+        this.tankImg.style.objectFit = 'center'
+        this.tankImg.style.cursor = 'pointer'
+        this.tankImg.style.transition = 0.3 + 's'
+        tanksBox.append(this.tankImg)
+        parentEl.append(tanksBox)
+
+        this.tankInterval = setInterval(() => {
+          topPosition++
+          if (topPosition < innerHeight - 100 && this.explosion() !== null) {
+            tanksBox.style.top = topPosition + 'px'
+          } else { clearInterval(this.tankInterval) }
+        }, 30);
+
+      }
+
+      run() {
+
+        let leftPos = this.randNum(0, innerWidth - 80)
+        this.render(leftPos)
+        this.explosion()
+      }
+
+      explosion() {
+        let parentElement = document.querySelector('.tanks')
+        parentElement.onclick = function (e) {
+          if (e.target.tagName === 'IMG') {
+            e.target.setAttribute('src', '../img/task2/explosion.png')
+            setTimeout(() => {
+              e.target.remove()
+            }, 500);
+          }
+        }
+      }
+    }
+
+    let tank = new Bayraktar
+    setInterval(() => {
+      tank.run()
+    }, 1500);
+
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 5</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 5</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Динамічний пошук. Є список працівників і поле пошуку. При введенні відображаються усі, які містять
+        вказаний фрагмент</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+
+  <div class="list__items">
+    <ul class="list__names names">
+      <li class="names__item">Adam Pietrak</li>
+      <li class="names__item">Steven Hok</li>
+      <li class="names__item">Grek Dartush</li>
+      <li class="names__item">Igor Savenko</li>
+      <li class="names__item">Sergio Pagani</li>
+      <li class="names__item">Filip Stuker</li>
+      <li class="names__item">Jordan Hendersen</li>
+      <li class="names__item">Miko Jolovich</li>
+      <li class="names__item">Sandra Ballok</li>
+      <li class="names__item">Lari Keyn</li>
+      <li class="names__item">Margo Terkovic</li>
+      <li class="names__item">Jo Anry</li>
+    </ul>
+
+    <div class="list__search search">
+      <label for="nameSaerch" class="search__label"> Search
+        <input type="text" id="nameSearch" class="search__input">
+      </label>
+      <ul class="search__list">
+
+      </ul>
+    </div>
+  </div>
+
+  <script>
+
+    class SearchName {
+      search() {
+        const arrName = document.querySelectorAll('.names__item')
+        let searchValue = inputSearch.value.toUpperCase()
+        const parentUlForLi = document.querySelector('.search__list')
+        parentUlForLi.innerText = ''
+        arrName.forEach(element => {
+          if (element.innerText.toUpperCase().includes(searchValue)) {
+            let newLi = document.createElement('li')
+            newLi.innerText = element.innerText
+            parentUlForLi.append(newLi)
+          }
+        });
+      }
+    }
+
+
+    let ser = new SearchName()
+
+    const inputSearch = document.querySelector('#nameSearch')
+    inputSearch.oninput = ser.search
+  </script>
+</body>
+
+</html>

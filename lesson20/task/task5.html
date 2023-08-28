@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 6</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 6</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано список автомобілів (марка, рік випуску, ціна). Сформувати елементи для фільтрування з використанням
+        випадаючого списку (контент цих випадаючих списків сформувати у залежності від переданого списку).</p>
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <form action="#" class="form-select">
+
+  </form>
+
+  <div class="result-search">
+    <h3>Знайдені автомобілі</h3>
+
+    <div class="search-result">
+
+    </div>
+  </div>
+
+
+  <script>
+
+    let carList = [
+      {
+        model: 'audi',
+        graduationYear: 2015,
+        price: 5000,
+      },
+      {
+        model: 'audi',
+        graduationYear: 2012,
+        price: 2560,
+      },
+      {
+        model: 'volkswagen',
+        graduationYear: 2013,
+        price: 11000,
+      },
+      {
+        model: 'peugeot',
+        graduationYear: 2016,
+        price: 6500,
+      },
+      {
+        model: 'audi',
+        graduationYear: 2011,
+        price: 6700,
+      },
+      {
+        model: 'citroen',
+        graduationYear: 2005,
+        price: 2500,
+      },
+      {
+        model: 'subaru',
+        graduationYear: 2018,
+        price: 15000,
+      },
+    ]
+
+
+    class SearchCar {
+      constructor(listCar) {
+        this.listCar = [...listCar]
+      }
+      // _________________________________________________________
+      listSelect() {
+        this.arrListSelect = []
+
+        for (const element of this.listCar) {
+
+          let listKey = Object.keys(element)
+
+          for (const keyElement of listKey) {
+
+            let keyItem = this.arrListSelect.includes(keyElement)
+
+            if (keyItem !== true) this.arrListSelect.push(keyElement)
+          }
+        }
+      }
+
+      // _________________________________________________________
+      listOption(elSelect) {
+        let arr = JSON.parse(JSON.stringify(this.listCar))
+        let arrListOption = []
+
+        arrListOption = arr.map((element) => {
+
+          for (const key in element) {
+
+            if (key === elSelect) return element[key]
+
+          }
+        }
+        )
+
+        arrListOption.sort((a, b) => {
+          if (a < b) return -1
+          if (a > b) return 1
+          return 0
+        })
+
+        let sortListOption = []
+
+        arrListOption.forEach(element => {
+
+          if (sortListOption.includes(element) !== true)
+
+            sortListOption.push(element)
+        });
+        return sortListOption
+      }
+
+      // _________________________________________________________
+      renderSelectedSearch() {
+        this.listSelect()
+
+        for (const elementSelect of this.arrListSelect) {
+
+          this.renderSelect(elementSelect)
+
+          this.renderOption(elementSelect, null)
+
+          let optionList = this.listOption(elementSelect)
+
+          for (const elOption of optionList) {
+
+            this.renderOption(elementSelect, elOption)
+          }
+        }
+      }
+      // _________________________________________________________
+      renderSelect(name) {
+        let parentEl = document.querySelector('.form-select')
+        let newLabel = document.createElement('label')
+        newLabel.innerText = name.toLowerCase()
+
+        let newSelect = document.createElement('select')
+
+        newSelect.name = 'Search' + name
+        newSelect.title = name.toLowerCase()
+        newSelect.setAttribute('id', name)
+        newLabel.append(newSelect)
+        parentEl.append(newLabel)
+      }
+      // _________________________________________________________
+      renderOption(name, optionValue) {
+        let parentSelect = document.querySelector('#' + name)
+
+        let newOption = document.createElement('option')
+        newOption.value = optionValue
+        newOption.innerText = optionValue
+        newOption.className = name + 'search'
+        parentSelect.append(newOption)
+      }
+      // _________________________________________________________
+
+      renderResultSearch(searchEl) {
+        let parentEl = document.querySelector('.search-result')
+        let newDiv = document.createElement('div')
+        newDiv.innerText = this.listCar[searchEl].model + '   ' + 'year:' + this.listCar[searchEl].graduationYear + '   ' + "price:" + this.listCar[searchEl].price
+        parentEl.append(newDiv)
+      }
+      // _________________________________________________________
+      searchEngine(selectChoice) {
+        this.objToCompare = {}
+
+        for (const element of selectChoice) {
+          let nameEl = element.getAttribute('id')
+          this.objToCompare[nameEl] = element.value
+        }
+
+        console.log(this.objToCompare);
+        let parentEl = document.querySelector('.search-result')
+        parentEl.innerText = ''
+
+        this.listCar.forEach((carElement, index) => {
+
+          let count = 0
+
+          for (const key in carElement) {
+
+            if (typeof (carElement[key]) !== 'number') {
+
+              if (carElement[key] === this.objToCompare[key] || this.objToCompare[key] === 'null') count++
+            } else {
+
+              if (carElement[key] === parseInt(this.objToCompare[key]) || this.objToCompare[key] === 'null') count++
+            }
+          }
+          if (count === Object.keys(this.objToCompare).length) this.renderResultSearch(index)
+        });
+      }
+    }
+
+    let newCar = new SearchCar(carList)
+    newCar.renderSelectedSearch()
+
+    let selectBody = document.querySelector('.form-select')
+    selectBody.onchange = function (e) {
+      newCar.searchEngine(selectBody)
+    }
+
+  </script>
+</body>
+
+</html>

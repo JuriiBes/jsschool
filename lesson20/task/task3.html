@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 4</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>На сторінці міститься певна кількість кнопок і інпутів. Підраховувати загальну кількість кліків
+        окремо на кнопках і окремо на інпутах.</p>
+
+
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <div class="countclick">
+    <form class="form">
+      <label for="age" class="form__label"><input type="number" id="age" value="100" class="form__input">Age</label>
+      <label for="height" class="form__label"><input type="number" id="height" value="100"
+          class="form__input">Height</label>
+      <label for="weight" class="form__label"><input type="number" id="weight" value="100"
+          class="form__input">Weight</label>
+      <label for="salary" class="form__label"><input type="number" id="salary" value="100"
+          class="form__input">Salary</label>
+      <button type="button" class="form__button">Seniority</button>
+      <button type="button" class="form__button">Department number</button>
+      <button type="button" class="form__button">Sequence number</button>
+    </form>
+
+    <div class="count">
+      <div class="count__input">
+        <h4 class="count__title">Count Input</h4>
+        <span id="countInput">0</span>
+      </div>
+      <div class="count__button">
+        <h4 class="count__title">Count Button</h4>
+        <span id="countButton">0</span>
+      </div>
+    </div>
+  </div>
+  <script>
+
+    class clickCount {
+
+      count() {
+        let parentEl = document.querySelector('.form')
+        let countInput = document.querySelector('#countInput')
+        let countButton = document.querySelector('#countButton')
+        let count
+        parentEl.onclick = function (e) {
+          if (e.target.tagName === 'INPUT') {
+            count = parseInt(countInput.innerText) + 1
+
+            countInput.innerText = count
+          } else if (e.target.tagName === 'BUTTON') {
+            count = parseInt(countButton.innerText) + 1
+
+            countButton.innerText = count
+          }
+        }
+      }
+
+    }
+
+    let newCountClick = new clickCount()
+    newCountClick.count()
+
+  </script>
+</body>
+
+</html>
