@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <table>
+        <tr>
+          <th>Властивості</th>
+          <th>ID<br>
+            ПІБ<br>
+            Кількість грошей на рахунку
+          </th>
+        </tr>
+        <tr>
+          <th>Методи</th>
+          <th>Додавання грошей<br>
+            Зняття грошей<br>
+            ToString
+          </th>
+        </tr>
+      </table>
+      <p>На основі цього класу створити клас GoldenClient</p>
+      <table>
+        <tr>
+          <th>Властивості</th>
+          <th>ID<br>
+            ПІБ<br>
+            Кількість грошей на рахунку<br>
+            Ліміт кредитних коштів<br>
+            Відсоток за використання кредитних коштів<br>
+          </th>
+        </tr>
+        <tr>
+          <th>Методи</th>
+          <th>Додавання грошей<br>
+            Зняття грошей<br>
+            Визначення пені за використання кредитних коштів<br>
+            ToString
+          </th>
+        </tr>
+      </table>
+      <ul>
+        <li>Вивести усіх простих клієнтів;</li>
+        <li>Вивести усіх клієнтів GoldenClient</li>
+        <li>Знати сумарну кількість грошей на рахунку</li>
+      </ul>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+
+  <div class="new-client">
+    <div class="new-client__silver">
+      <div class="new-client__body">
+        <h3 class="new-client__title">Створити клієнта</h3>
+        <form action="" class="new-client__form">
+          <label for="clientId" class="new-client__label">ІД номер<input type="number" id="clientId"
+              class="new-client__input"></label>
+          <label for="clientName" class="new-client__label">ПІБ<input type="text" id="clientName"
+              class="new-client__input"></label>
+          <label for="clientBalance" class="new-client__label">Баланс коштів<input type="number" id="clientBalance"
+              class="new-client__input"></label>
+        </form>
+      </div>
+      <button class="new-client__button" id="silverButton">Створити</button>
+    </div>
+    <div class="new-client__gold">
+      <div class="new-client__body">
+        <h3 class="new-client__title-gold">Дані Gold</h3>
+        <form action="" class="new-client__form gold">
+          <label for="percentGold" class="new-client__label">Відсоток <input type="number" id="percentGold"
+              class="new-client__input"></label>
+          <label for="balanceGold" class="new-client__label">Кредитний ліміт<input type="number" id="balanceGold"
+              class="new-client__input"></label>
+        </form>
+      </div>
+      <button class="new-client__button button-gold" id="goldButton">Створити</button>
+    </div>
+  </div>
+
+  <div class="general">
+    <span>Загальна сума:</span>
+    <span class="general-sum"></span>
+  </div>
+
+  <div class="clients-list">
+    <div class="client-list__filter">
+      <form action="" class="clients-list__form">
+        <label for="allClient"><input name="filterClient" checked id="allClient" type="radio"
+            class="clients-list__input"> All</label>
+        <label for="silverClient"><input name="filterClient" id="silverClient" type="radio" class="clients-list__input">
+          Silver</label>
+        <label for="goldClient"><input name="filterClient" id="goldClient" type="radio" class="clients-list__input">
+          Gold</label>
+      </form>
+    </div>
+
+    <div class="client-list__items">
+
+    </div>
+  </div>
+
+  <script>
+
+    // Для гарної візуалізації потрібно картку клаєнта робити посиланням і виводити її в оркему сторінку з повную інформацією
+    // та там організовувати зняття - поповнення коштів, вивід розрахунків за користування кредитним лімітем
+
+    // let parentEl = document.querySelector('.client__buttons')
+
+    // parentEl.onclick = function (e) {
+    //   let valueChangeMoney = parseInt(document.querySelector('#chBalance').value)
+    //   if (e.target.id === 'addMoney') newClient.chMoney(valueChangeMoney)
+    //   if (e.target.id === 'subMoney') newClient.chMoney(valueChangeMoney * -1)
+    //   newClient.toString()
+    // }
+
+    class Client {
+      constructor(clientId, clientName, clientBalance) {
+        this.clientId = clientId
+        this.clientName = clientName
+        this.clientBalance = clientBalance
+      }
+
+      changeClientBalance(sumMoney) {
+        if (sumMoney !== 0 && sumMoney > 0) { this.clientBalance = this.clientBalance + sumMoney }
+        if (sumMoney !== 0 && sumMoney < 0 && Math.abc(sumMoney) < this.clientBalance) {
+          this.clientBalance = this.clientBalance + sumMoney
+        }
+      }
+      toString() {
+        return alert(` Name:${this.clientName}. ID:${this.clientId}. Balance: ${this.clientBalance}`)
+      }
+    }
+
+    class GoldClient extends Client {
+      constructor(clientId, clientName, clientBalance, percent = 25, creditMoney = 1000) {
+        super(clientId, clientName, clientBalance)
+        this.percent = percent
+        this.creditMoney = creditMoney
+      }
+
+      interestCreditFunds() {
+        let year = 12
+        let monthlyFeeForUsingCreditFunds = ((creditMoney / 100) * percent) / year
+        return monthlyFeeForUsingCreditFunds
+      }
+      toString() {
+        return `Credit limit: ${this.creditMoney}. Credit percent: ${this.percent}`
+      }
+    }
+    // -----------------------------------------------------
+    class GeneralSum {
+      generalSunMoney(arr) {
+        return arr.reduce((sum, element) => element ? sum = sum + element.clientBalance : sum, 0)
+
+      }
+      render() {
+        let parentEl = document.querySelector('.general-sum')
+        parentEl.innerText = ''
+        parentEl.innerText = this.generalSunMoney(baseDataClient) + ' usd'
+      }
+    }
+    // -----------------------------------------------------
+    class NewClient {
+
+      silverClient() {
+        let clientId = document.querySelector('#clientId').value
+        let clientName = document.querySelector('#clientName').value
+        let clientBalance = parseInt(document.querySelector('#clientBalance').value)
+        let newClient = new Client(clientId, clientName, clientBalance)
+        baseDataClient.push(newClient)
+        this.render(newClient, 'silver')
+        document.querySelector('#clientId').value = ''
+        document.querySelector('#clientName').value = ''
+        document.querySelector('#clientBalance').value = ''
+      }
+
+      goldClient() {
+        let clientId = document.querySelector('#clientId').value
+        let clientName = document.querySelector('#clientName').value
+        let clientBalance = parseInt(document.querySelector('#clientBalance').value)
+
+        let percentGold = parseInt(document.querySelector('#percentGold').value)
+        let balanceGold = parseInt(document.querySelector('#balanceGold').value)
+
+        let newClient = new GoldClient(clientId, clientName, clientBalance, percentGold, balanceGold)
+        baseDataClient.push(newClient)
+        this.render(newClient, 'gold')
+
+        document.querySelector('#clientId').value = ''
+        document.querySelector('#clientName').value = ''
+        document.querySelector('#clientBalance').value = ''
+        document.querySelector('#percentGold').value = ''
+        document.querySelector('#balanceGold').value = ''
+      }
+
+      render(objClient, clientValue) {
+        let parentEl = document.querySelector('.client-list__items')
+
+        let newDiv = document.createElement('div')
+        newDiv.setAttribute('value-client', clientValue)
+        newDiv.className = 'client-list__item'
+
+        let newSpan
+        for (const key in objClient) {
+          newSpan = document.createElement('span')
+          newSpan.innerText = key + ':' + objClient[key]
+          newDiv.append(newSpan)
+        }
+        parentEl.append(newDiv)
+      }
+
+    }
+
+    // ---------------------------------------
+
+    let baseDataClient = []
+
+    // ---------------------------------------
+
+    let newClient = new NewClient()
+    let sumGeneralMoney = new GeneralSum()
+
+    let buttonSilver = document.querySelector('#silverButton')
+    buttonSilver.onclick = function () {
+      console.log('silver')
+      newClient.silverClient()
+      sumGeneralMoney.render()
+    }
+
+    let buttonGold = document.querySelector('#goldButton')
+    buttonGold.onclick = function () {
+      console.log('gold')
+      newClient.goldClient()
+      sumGeneralMoney.render()
+    }
+
+    function filter(range) {
+      let allPosition = document.querySelectorAll('.client-list__item')
+      for (const element of allPosition) {
+        if (element.getAttribute('value-client') === range) {
+          element.style.overflow = 'visible'
+          element.style.opacity = '1'
+          element.style.display = 'flex'
+        } else {
+          element.style.overflow = 'hidden'
+          element.style.opacity = '0'
+          element.style.display = 'none'
+        }
+      }
+    }
+
+    let checkBoXFilter = document.querySelector('.clients-list__form')
+    checkBoXFilter.addEventListener('click', function (e) {
+      if (document.getElementById('allClient').checked) {
+        let allPosition = document.querySelectorAll('.client-list__item')
+        for (const element of allPosition) {
+          element.style.overflow = 'visible'
+          element.style.opacity = '1'
+          element.style.display = 'flex'
+        }
+      } else if (document.getElementById('silverClient').checked) {
+        filter('silver')
+
+      } else if (document.getElementById('goldClient').checked) {
+        filter('gold')
+      }
+    }
+    )
+
+
+  </script>
+</body>
+
+
+</html>

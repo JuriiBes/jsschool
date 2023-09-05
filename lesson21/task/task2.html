@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 3</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 3</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Розробити Класи</p>
+      <table>
+        <tr>
+          <th>House</th>
+          <th>Dog</th>
+          <th>Bird</th>
+        </tr>
+        <tr>
+          <th>--- властивості ---<br>
+            • Координата Х<br>
+            • Координата У<br>
+            • шлях до зображення<br>
+            • інтервал оновлення<br>
+            --- методи ---<br>
+            • генерування елемента розмітки<br>
+            • оновлення через вказаний інтервал (збільшення або зменшення масштабу (об’єкт не рухається)
+          </th>
+          <th>--- властивості ---<br>
+            • Координата Х<br>
+            • Координата У<br>
+            • шлях до зображення<br>
+            • інтервал оновлення<br>
+            --- методи ---<br>
+            • генерування елемента розмітки<br>
+            • оновлення через вказаний інтервал (випадкове зміщення по горизонталі (зміна координати Х))
+          </th>
+          <th>--- властивості ---<br>
+            • Координата Х<br>
+            • Координата У<br>
+            • шлях до зображення<br>
+            • інтервал оновлення<br>
+            --- методи ---<br>
+            • генерування елемента розмітки<br>
+            • оновлення через вказаний інтервал (випадкове переміщення у довільному напрямку)
+          </th>
+        </tr>
+      </table>
+      <p>Створити спільний клас предок</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+
+  <div class="body__practice">
+
+
+  </div>
+  <script>
+
+
+    class GeneralClass {
+      constructor(nameEl, pointX, pointY, scrImage, parentElement) {
+        this.nameEl = nameEl
+        this.pointX = pointX
+        this.pointY = pointY
+        this.scrImage = scrImage
+        this.parentElement = '.' + parentElement
+      }
+
+      markupElement() {
+        let parentEl = document.querySelector(this.parentElement)
+
+        let newDiv = document.createElement('div')
+        newDiv.setAttribute('id', this.nameEl)
+        newDiv.style.position = 'absolute'
+        newDiv.style.overflow = 'hidden'
+        // newDiv.
+        newDiv.style.width = '350px'
+        newDiv.style.height = '350px'
+        newDiv.style.top = this.pointY + '%'
+        newDiv.style.left = this.pointX + '%'
+
+        let newImage = document.createElement('img')
+        newImage.setAttribute('src', this.scrImage)
+        newImage.setAttribute('alt', 'image')
+        newImage.style.position = "absolute"
+        newImage.style.objectFit = 'center'
+        newImage.style.top = '0'
+        newImage.style.left = '0'
+        newImage.style.width = "100%"
+        newImage.style.height = "100%"
+        newDiv.append(newImage)
+
+        parentEl.append(newDiv)
+      }
+    }
+
+    class House extends GeneralClass {
+      constructor(name, pointX, pointY, scrImage, parentElement, intervalUpdate) {
+        super(name, pointX, pointY, scrImage, parentElement)
+        this.intervalUpdate = intervalUpdate * 1000
+      }
+      render() {
+        super.markupElement()
+        setTimeout(() => {
+          // let idName = 
+          let elForChange = document.querySelector('#' + this.nameEl)
+          elForChange.style.transform = `scale(1.5)`
+
+
+
+        }, this.intervalUpdate);
+      }
+    }
+
+    class Dog extends GeneralClass {
+      constructor(name, pointX, pointY, scrImage, parentElement, intervalUpdate) {
+        super(name, pointX, pointY, scrImage, parentElement)
+        this.intervalUpdate = intervalUpdate * 1000
+      }
+      render() {
+        super.markupElement()
+        setTimeout(() => {
+          let elForChange = document.querySelector('#' + this.nameEl)
+          elForChange.style.top = (50 + Math.floor(Math.random() * 31)) + '%'
+        }, this.intervalUpdate);
+      }
+    }
+
+    class Bird extends GeneralClass {
+      constructor(name, pointX, pointY, scrImage, parentElement, intervalUpdate) {
+        super(name, pointX, pointY, scrImage, parentElement)
+        this.intervalUpdate = intervalUpdate * 1000
+      }
+      render() {
+        super.markupElement()
+        setTimeout(() => {
+          let elForChange = document.querySelector('#' + this.nameEl)
+          elForChange.style.top = (50 + Math.floor(Math.random() * 31)) + '%'
+          elForChange.style.left = (50 + Math.floor(Math.random() * 31)) + '%'
+        }, this.intervalUpdate);
+      }
+    }
+
+    let imgHouse = new House('house', 10, 10, '../img/house.png', 'body__practice', 1)
+    let imgDog = new Dog('dog', 65, 65, '../img/dog.png', 'body__practice', 2)
+    let imgBird = new Bird('bird', 45, 28, '../img/bird.png', 'body__practice', 3)
+    imgHouse.render()
+    imgDog.render()
+    imgBird.render()
+  </script>
+</body>
+
+
+
+</html>

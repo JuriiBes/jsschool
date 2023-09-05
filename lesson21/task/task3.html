@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 4</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до 12, чи не канікули) та
+        оцінку (перевіряти чи є числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку (якщо оцінка
+        погана і це не останній місяць у семестрі) . Обробку усіх помилок зробити з використанням
+        відповідних класів.</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <form action="" class="range__form">
+    <label for="monthPupil" class="range__label">Введіть номер місяця<input type="number" id="monthPupil"
+        class="range__input"></label>
+    <label for="rangePupil" class="range__label">Введіть оцінку учня<input type="number" id="rangePupil"
+        class="range__input"></label>
+    <button type="button" class="range__button">Result</button>
+  </form>
+
+  <div class="range__result"></div>
+
+  <script>
+
+
+    function errorFunc(watchEl, param1, param2, nameEl, message) {
+      try {
+        if (watchEl < param1 || param2 < watchEl) throw new Error('error data')
+        else {
+          let inputEl = document.querySelector(nameEl)
+          inputEl.style.border = '1px solid #e1de0c'
+          return 1
+        }
+
+      } catch (error) {
+        let inputEl = document.querySelector(nameEl)
+        inputEl.value = ''
+        inputEl.style.border = '2px solid #e10c0c'
+        inputEl.setAttribute('placeholder', message)
+      }
+    }
+
+
+
+    let watchButton = document.querySelector('.range__button')
+    let parentEl = document.querySelector('.range__result')
+
+    watchButton.onclick = function () {
+      parentEl.innerText = ''
+      let monthStudyValue = parseInt(document.querySelector('#monthPupil').value)
+      let month = errorFunc(monthStudyValue, 1, 12, '#monthPupil', 'не коректний місяць')
+      let rangeStudyValue = parseInt(document.querySelector('#rangePupil').value)
+      let range = errorFunc(rangeStudyValue, 1, 100, '#rangePupil', 'не коректна оцінка')
+      let result
+      try {
+        if (month !== undefined && range !== undefined) {
+          if (rangeStudyValue >= 60) { result = "Range it's good." }
+          else if (rangeStudyValue < 60 && monthStudyValue > 8 || monthStudyValue < 6) { result = "The score can be corrected." }
+          else { result = "The assessment cannot be corrected" }
+        } else throw new Error('Error data')
+
+        parentEl.innerText = result
+      } catch (error) {
+        parentEl.innerText = 'Not enough data'
+      }
+    }
+
+
+
+  </script>
+</body>
+
+</html>
