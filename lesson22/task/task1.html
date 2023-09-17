@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 2</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <div>Користувач вводить дату народження. Визначити, скільки йому повних років
+      </div>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+
+  <h2>Результат рішення</h2>
+
+  <form action="" class="date-form">
+    <label for="birthday" class="date-label">Введіть вашу дату народження: <input id="birthday" type="date"
+        class="input-date"></label>
+  </form>
+  <div class="result">
+    Ваш вік: <span class="result-span"></span>
+  </div>
+
+  <script>
+
+    let valueBirthday = document.querySelector('#birthday')
+    let resultBody = document.querySelector('.result-span')
+
+    valueBirthday.onchange = function () {
+      let today = new Date().getTime()
+      // Без врахування високосного року
+      resultBody.innerText = Math.floor((today - valueBirthday.valueAsNumber) / 31536000000) + '   p.'
+
+      // Врахування високосного року
+      // let countYears = 0
+      // let valueYearsMs = today - valueBirthday.valueAsNumber
+      // console.log(valueYearsMs);
+      // let yearToday = new Date().getFullYear()
+      // while (valueYearsMs >= 31536000000) {
+      //   if (yearToday % 4 !== 0) {
+      //     valueYearsMs = valueYearsMs - 31536000000
+      //     countYears += 1
+      //     yearToday -= 1
+      //   } else {
+      //     valueYearsMs = valueYearsMs - 31622400000
+      //     countYears += 1
+      //     yearToday -= 1
+      //   }
+      // }
+      // resultBody.innerText = countYears
+    }
+
+
+  </script>
+</body>
+
+
+
+</html>

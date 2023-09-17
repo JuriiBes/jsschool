@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 3</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 3</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Користувач іде у відпустку на 56 днів. Визначити дату на момент його повернення</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+
+  </div>
+  <h2>Результат рішення</h2>
+
+  <div class="task3">
+    <form action="" class="date-form form-task3">
+      <label for="startVacation" class="date-label">Введіть дату початку відпустки: <input id="startVacation"
+          type="date" class="input-date"></label>
+      <label for="vacation" class="date-label">Введіть тривалість відпустки в днях: <input id="vacation" type="number"
+          class="input-date"></label>
+    </form>
+
+    <div class="result">
+      На роботу Ви повертаєтесь: <span class="result-span"></span>
+    </div>
+  </div>
+  <script>
+
+    let parentEl = document.querySelector('.form-task3')
+    let answerAsk = document.querySelector('.result-span')
+    parentEl.onchange = function () {
+
+      let startDay = document.querySelector('#startVacation').valueAsNumber + parseInt(document.querySelector('#vacation').value) * 86400000
+
+      let dayEnd = new Date(startDay)
+
+      answerAsk.innerText = dayEnd.toLocaleDateString()
+
+    }
+
+
+
+
+  </script>
+</body>
+
+
+
+</html>

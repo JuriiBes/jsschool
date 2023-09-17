@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 6</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 6</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Дано дата виробництва йогурта (вводимо рік, місяць, день) та кількість днів придатності. Визначити чи
+        є він придатним на даний момент.
+      </p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <form action="" class="date-form form-task">
+    <label for="startProduction" class="date-label">Введіть дату виробництва йогурта: <input id="startProduction"
+        type="date" class="input-date"></label>
+    <label for="expirationDate" class="date-label">Введіть термін придатності в днях: <input id="expirationDate"
+        type="number" class="input-date"></label>
+  </form>
+
+  <div class="container-result">Цей йогурт <span class="result"></span> споживати.</div>
+
+  <script>
+    // Визначення блоку для спостерігача
+    let parentForm = document.querySelector('.date-form')
+
+    // Визначення блоку для виведення результату розрахунку
+    let parentAnswer = document.querySelector('.container-result')
+    let containerAnswer = document.querySelector('.result')
+    // Визначення інпутів з яких буде считано значення
+    let inputDate = document.querySelector('#startProduction')
+    let inputExpiration = document.querySelector('#expirationDate')
+
+    // Спостерігач
+    parentForm.onchange = function () {
+      // Визначення сьогоднішньої дати
+      let today = new Date()
+      // Зміна функції display для блоку виведення результату, до початку розрахунків display: none;
+      parentAnswer.style.display = 'block'
+      // Розрахунок кінцевого терміну придатності продукту
+      let resultExpirationDate = inputDate.valueAsNumber + inputExpiration.value * 86400000
+      // Пррівняння кінцевого терміну з сьогоднішетою датою та виведення результату користувачу
+      if (today < resultExpirationDate) {
+        containerAnswer.innerText = 'можна'
+      } else { containerAnswer.innerText = 'не можна' }
+
+    }
+
+  </script>
+</body>
+
+</html>

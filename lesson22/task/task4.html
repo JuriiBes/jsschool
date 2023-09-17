@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 5</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 5</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Задаємо користувачу задачу з додавання двох чисел. Визначити скільки секунд було використано для
+        розв’язання задачі.</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <div class="result">
+    Затрачений час: <span class="result-span">0</span>
+  </div>
+  </div>
+  <script>
+    let randNumOne = Math.floor(Math.random() * 100)
+    let randNumTwo = Math.floor(Math.random() * 100)
+    let answer = randNumOne + randNumTwo
+    let startTime = new Date()
+
+    let resUser = parseInt(prompt(`${randNumOne} + ${randNumTwo} =`))
+    let parentElResult = document.querySelector('.result-span')
+    let resultTime
+
+    if (resUser) {
+      let endTime = new Date()
+      resultTime = (endTime - startTime) / 1000
+      if (resUser === answer) {
+        parentElResult.innerText = resultTime + ' c. Відповідь вірна.'
+        parentElResult.style.color = 'yellowgreen'
+      } else {
+        parentElResult.innerText = resultTime + ' c. Відповідь не вірна.'
+        parentElResult.style.color = 'red'
+      }
+    }
+  </script>
+</body>
+
+
+
+</html>

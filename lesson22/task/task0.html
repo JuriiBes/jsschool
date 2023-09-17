@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 1</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <ul>
+        <li>Визначити привітання у залежності від часу доби (Доброго дня, Доброго ранку, Доброго вечора)
+        </li>
+        <li>Вивести дату у форматі
+          “місяць – рік – вихідний/робочий”</li>
+        <li>Визначити поточну пору року</li>
+        <li>Вивести назву дня</li>
+      </ul>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+
+  <h2>Результат рішення</h2>
+
+
+  <div class="today">
+
+  </div>
+
+
+  <script>
+
+    function dayOff(day) {
+      let result
+      switch (day) {
+        case 6:
+        case 0: result = 'вихідний день.'
+          break;
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5: result = "робочий день."
+          break;
+
+      }
+      return result
+    }
+    function printMonth(month) {
+      let result
+      switch (month) {
+        case 11:
+        case 0:
+        case 1: result = 'Зима.'
+          break;
+        case 2:
+        case 3:
+        case 4: result = 'Весна.'
+          break;
+        case 5:
+        case 6:
+        case 7: result = 'Літо.'
+          break;
+        case 8:
+        case 9:
+        case 10: result = 'Осінь.'
+          break;
+      }
+      return result
+    }
+
+    function greeting(presentTime) {
+      let result
+      if (10 <= presentTime && presentTime <= 18) {
+        result = 'Доброго дня!'
+      } else {
+        if (6 <= presentTime && presentTime <= 9) {
+          result = 'Доброго ранку!'
+        } else {
+          if (19 <= presentTime && presentTime <= 22) {
+            result = 'Доброго вечора!'
+          } else result = 'Доброго ночі!'
+        }
+      }
+      return result
+    }
+
+    function today() {
+      let dateToday = new Date()
+
+      let monthToday = dateToday.getMonth()
+      let dayToday = dateToday.getDay()
+      let timePresent = dateToday.getHours()
+
+      let parentEl = document.querySelector('.today')
+      let newSpan = document.createElement('span')
+
+      newSpan.innerText = ` ${greeting(timePresent)}
+      ${dateToday.toLocaleDateString('uk-UA', { month: 'long', year: 'numeric' })} 
+      Сьогодні - ${dateToday.toLocaleDateString('uk-UA', { weekday: 'long' })}, це - ${dayOff(dayToday)}
+      І на дворі ${printMonth(monthToday)}`
+      parentEl.append(newSpan)
+
+    }
+
+    today()
+
+  </script>
+</body>
+
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 7</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <h1>Задача 7</h1>
+  <div class="task__item">
+    <div class="task__condition">
+      <p>Сформувати масив з 1000 елементів від 1 до 800. Порівняти час сортування бульбашкою і
+        вставкою.</p>
+    </div>
+    <a href="../index.html" class="task__link">Повернення на головну сторінку</a>
+  </div>
+  <h2>Результат рішення</h2>
+
+  <div class="bubble">Сортування масиву з 800 значень від 1 до 1000 методом бульбашки зайняло <span
+      class="bubble-result"></span> мс.</div>
+  <div class="insert">Сортування масиву з 800 значень від 1 до 1000 методом вставлення зайняло <span
+      class="insert-result"></span> мс.</div>
+
+  <script>
+    let arrNumbers = []
+
+    for (let i = 0; i < 800; i++) {
+      arrNumbers.push(Math.floor(Math.random() * 1000))
+    }
+
+    function bubbleSort(arrForSort) {
+      let arrSort = [...arrForSort]
+      let change
+      let temp
+
+      do {
+        change = false
+        for (let i = 1; i < arrSort.length; i++) {
+
+          if (arrSort[i - 1] > arrSort[i]) {
+            temp = arrSort[i - 1]
+            arrSort[i - 1] = arrSort[i]
+            arrSort[i] = temp
+            change = true
+          }
+        }
+      } while (change);
+
+      return arrSort
+    }
+
+    function insertSort(arrForSort) {
+      let arrSort = [...arrForSort]
+      for (let i = 1; i < arrSort.length; i++) {
+        const arrElement = arrSort[i]
+        let j = i - 1
+        while (j >= 0 && arrSort[j] > arrElement) {
+          arrSort[j + 1] = arrSort[j]
+          j = j - 1
+        }
+        arrSort[j + 1] = arrElement
+      }
+      return arrSort
+    }
+
+    let startTimeBubble = new Date()
+    bubbleSort(arrNumbers)
+    let endTimeBubble = new Date()
+    let bubbleTime = endTimeBubble - startTimeBubble
+    document.querySelector('.bubble-result').innerText = bubbleTime
+
+    let startTimeInsert = new Date().getMilliseconds()
+    insertSort(arrNumbers)
+    let endTimeInsert = new Date().getMilliseconds()
+    let insertTime = endTimeInsert - startTimeInsert
+    document.querySelector('.insert-result').innerText = insertTime
+
+
+
+
+
+  </script>
+</body>
+
+
+
+</html>
